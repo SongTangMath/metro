@@ -32,15 +32,19 @@ public class MetroInfo {
     private Double latitude;
 
     private List<Integer> lineIds;
-    // 如果为换乘站,拼接换乘站的信息
-    private List<MetroTransferLines> transferLines;
+    // 如果为换乘站,拼接换乘站的信息.不包括当条线路.例如13号线立水桥换5号线则transferLines中只有5号线
+    private List<MetroTransferLine> transferLines;
+    // 绘图信息
+
+    private Double xPos;
+    private Double yPos;
   }
 
   @AllArgsConstructor
   @NoArgsConstructor
   @Data
   @Builder
-  public static class MetroTransferLines {
+  public static class MetroTransferLine {
     private Integer lineId;
     private String lineName;
     private String color;
