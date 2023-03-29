@@ -19,4 +19,6 @@ public class MetroInfoRequest {
   @Builder.Default private Double stationRadius = 10.0;
   // 两站间连线宽度.
   @Builder.Default private Double connectionLineWidth = 10.0;
+
+  @Builder.Default private Integer fontSize = 15;
 }

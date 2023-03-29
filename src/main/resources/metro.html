@@ -82,9 +82,9 @@
       ctx.restore();
     }
 
-    for (connectionLine of beijing_data.stationConnections) {
+    for (connectionLine of [...beijing_data.stationConnections,...beijing_data.stationTransfers]) {
       ctx.beginPath();
-      ctx.fillStyle = beijing_data.color;
+      ctx.fillStyle = connectionLine.color;
       for (line of connectionLine.lines) {
         if (line.lineType === "line") {
           ctx.lineTo(line.lineEndX, line.lineEndY);
@@ -102,6 +102,18 @@
       ctx.stroke();
       ctx.fill();
       ctx.closePath();
+    }
+
+    
+    for (transferText of beijing_data.transferTexts) {
+      ctx.save();
+      ctx.translate(transferText.xpos, transferText.ypos);
+      ctx.rotate(-Math.PI / 4);
+      ctx.textAlign = "center";
+      ctx.font = "15px Microsoft Yahei";
+      ctx.fillStyle = "black";
+      ctx.fillText(transferText.text, 15, 0);
+      ctx.restore();
     }
   }
 

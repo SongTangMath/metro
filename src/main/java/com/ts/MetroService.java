@@ -108,6 +108,13 @@ public class MetroService {
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
+                .lineId(9)
+                .lineName("9号线")
+                .stationNames(Arrays.asList())
+                .color("#8FC31F")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
                 .lineId(10)
                 .lineName("10号线")
                 .stationNames(Arrays.asList())
@@ -115,10 +122,10 @@ public class MetroService {
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
-                .lineId(15)
-                .lineName("15号线")
+                .lineId(11)
+                .lineName("11号线")
                 .stationNames(Arrays.asList())
-                .color("#5B2C68")
+                .color("#ed796b")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -129,6 +136,27 @@ public class MetroService {
                         "西直门", "大钟寺", "知春路", "五道口", "上地", "清河站", "西二旗", "龙泽", "回龙观", "霍营", "立水桥",
                         "北苑", "望京西", "芍药居", "光熙门", "柳芳", "东直门"))
                 .color("#f9e700")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(14)
+                .lineName("14号线")
+                .stationNames(Arrays.asList())
+                .color("#D5A7A1")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(15)
+                .lineName("15号线")
+                .stationNames(Arrays.asList())
+                .color("#5B2C68")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(24)
+                .lineName("S1线")
+                .stationNames(Arrays.asList())
+                .color("#B35A20")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -163,11 +191,11 @@ public class MetroService {
             MetroStation.builder().stationName("天安门西").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("天安门东").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("王府井").lineIds(Arrays.asList(1)).build(),
-            MetroStation.builder().stationName("东单").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("东单").lineIds(Arrays.asList(1, 5)).build(),
             MetroStation.builder().stationName("建国门").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("永安里").lineIds(Arrays.asList(1)).build(),
-            MetroStation.builder().stationName("国贸").lineIds(Arrays.asList(1)).build(),
-            MetroStation.builder().stationName("大望路").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("国贸").lineIds(Arrays.asList(1, 10)).build(),
+            MetroStation.builder().stationName("大望路").lineIds(Arrays.asList(1, 14)).build(),
             MetroStation.builder().stationName("四惠").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("四惠东").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("高碑店").lineIds(Arrays.asList(1)).build(),
@@ -392,33 +420,6 @@ public class MetroService {
             .stream()
             .collect(Collectors.toMap(MetroLine::getLineId, Function.identity()));
 
-    // 拼接换乘站相关信息
-    for (MetroStation stationWithTransfer :
-        stations.stream().filter(o -> o.getLineIds().size() > 1).collect(Collectors.toList())) {
-
-      List<Integer> otherLineIds =
-          stationWithTransfer
-              .getLineIds()
-              .stream()
-              .filter(o -> !line.getLineId().equals(o))
-              .collect(Collectors.toList());
-
-      stationWithTransfer.setTransferLines(
-          otherLineIds
-              .stream()
-              .map(lineIdToLine::get)
-              .map(
-                  o ->
-                      MetroTransferLine.builder()
-                          .lineId(o.getLineId())
-                          .lineName(o.getLineName())
-                          .color(o.getColor())
-                          .build())
-              .collect(Collectors.toList()));
-    }
-    // 换乘站数据
-    List<MetroStationConnection> stationTransfers = new ArrayList<>();
-
     // 计算单线路绘图的坐标信息.对于非环线,线路图为直线.站点的y坐标为canvas.height/2 x轴分成(站点个数+1)份.
     for (int i = 0; i < stations.size(); i++) {
       stations.get(i).setXPos((i + 1) * request.getCanvasWidth() / (stations.size() + 1.0));
@@ -480,7 +481,162 @@ public class MetroService {
       connections.add(
           MetroStationConnection.builder()
               .lines(Arrays.asList(leftStationRightArc, topLine, rightStationLeftArc, bottomLine))
+              .color(line.getColor())
               .build());
+    }
+
+    // 拼接换乘站相关信息 注意在此之前已经计算了各站点的绘图位置
+    List<MetroStationConnection> stationTransfers = new ArrayList<>();
+    List<MetroInfo.MetroStationTransferText> transferTexts = new ArrayList<>();
+    for (MetroStation stationWithTransfer :
+        stations.stream().filter(o -> o.getLineIds().size() > 1).collect(Collectors.toList())) {
+
+      List<Integer> otherLineIds =
+          stationWithTransfer
+              .getLineIds()
+              .stream()
+              .filter(o -> !line.getLineId().equals(o))
+              .collect(Collectors.toList());
+
+      stationWithTransfer.setTransferLines(
+          otherLineIds
+              .stream()
+              .map(lineIdToLine::get)
+              .map(
+                  o ->
+                      MetroTransferLine.builder()
+                          .lineId(o.getLineId())
+                          .lineName(o.getLineName())
+                          .color(o.getColor())
+                          .build())
+              .collect(Collectors.toList()));
+      // 暂时不考虑4线换乘的情况.即至多有2条换乘线路
+
+      Point point1 =
+          new Point(
+              stationWithTransfer.getXPos() - request.getStationRadius(),
+              stationWithTransfer.getYPos());
+      Point point2 =
+          new Point(
+              stationWithTransfer.getXPos() - request.getStationRadius(),
+              stationWithTransfer.getYPos() + request.getCanvasHeight() / 15);
+
+      Point point3 =
+          new Point(
+              stationWithTransfer.getXPos(),
+              stationWithTransfer.getYPos()
+                  + request.getCanvasHeight() / 15
+                  + request.getStationRadius());
+      Point point4 =
+          new Point(
+              stationWithTransfer.getXPos() + request.getStationRadius(),
+              stationWithTransfer.getYPos() + request.getCanvasHeight() / 15);
+      Point point5 =
+          new Point(
+              stationWithTransfer.getXPos() + request.getStationRadius(),
+              stationWithTransfer.getYPos());
+
+      Point point6 =
+          new Point(
+              stationWithTransfer.getXPos(),
+              stationWithTransfer.getYPos() + request.getStationRadius());
+
+      switch (otherLineIds.size()) {
+        case 1:
+          {
+            // 换乘站标记位于站点圆盘的下方.
+
+            // 顶部半圆
+            MetroStationConnectionLine topArc =
+                MetroStationConnectionLine.builder()
+                    .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                    .arcCenterX(stationWithTransfer.getXPos())
+                    .arcCenterY(stationWithTransfer.getYPos())
+                    .radius(request.getStationRadius())
+                    .arcStartAngle(0.0)
+                    .arcEndAngle(Math.PI)
+                    .build();
+
+            MetroStationConnectionLine leftLine =
+                MetroStationConnectionLine.constructFromPoints(point1, point2);
+
+            MetroStationConnectionLine bottomLeftLine =
+                MetroStationConnectionLine.constructFromPoints(point2, point3);
+
+            MetroStationConnectionLine bottomRightLine =
+                MetroStationConnectionLine.constructFromPoints(point3, point4);
+
+            MetroStationConnectionLine rightLine =
+                MetroStationConnectionLine.constructFromPoints(point4, point5);
+
+            stationTransfers.add(
+                MetroStationConnection.builder()
+                    .lines(
+                        Arrays.asList(topArc, leftLine, bottomLeftLine, bottomRightLine, rightLine))
+                    .color(lineIdToLine.get(otherLineIds.get(0)).getColor())
+                    .build());
+          }
+
+          break;
+        case 2:
+          {
+            // 第0换乘线顶部半圆
+            MetroStationConnectionLine transferLine0TopArc =
+                MetroStationConnectionLine.builder()
+                    .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                    .arcCenterX(stationWithTransfer.getXPos())
+                    .arcCenterY(stationWithTransfer.getYPos())
+                    .radius(request.getStationRadius())
+                    .arcStartAngle(Math.PI / 2)
+                    .arcEndAngle(Math.PI)
+                    .build();
+
+            MetroStationConnectionLine transferLine1TopArc =
+                MetroStationConnectionLine.builder()
+                    .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                    .arcCenterX(stationWithTransfer.getXPos())
+                    .arcCenterY(stationWithTransfer.getYPos())
+                    .radius(request.getStationRadius())
+                    .arcStartAngle(0.0)
+                    .arcEndAngle(Math.PI / 2)
+                    .build();
+
+            stationTransfers.add(
+                MetroStationConnection.builder()
+                    .lines(
+                        Arrays.asList(
+                            transferLine0TopArc,
+                            MetroStationConnectionLine.constructFromPoints(point1, point2),
+                            MetroStationConnectionLine.constructFromPoints(point2, point3),
+                            MetroStationConnectionLine.constructFromPoints(point3, point6)))
+                    .color(lineIdToLine.get(otherLineIds.get(0)).getColor())
+                    .build());
+
+            stationTransfers.add(
+                MetroStationConnection.builder()
+                    .lines(
+                        Arrays.asList(
+                            transferLine1TopArc,
+                            MetroStationConnectionLine.constructFromPoints(point6, point3),
+                            MetroStationConnectionLine.constructFromPoints(point3, point4),
+                            MetroStationConnectionLine.constructFromPoints(point4, point5)))
+                    .color(lineIdToLine.get(otherLineIds.get(1)).getColor())
+                    .build());
+          }
+          break;
+        default:
+          break;
+      }
+
+      // 在point3下方10位置处添加文本
+      for (int i = 0; i < otherLineIds.size(); i++) {
+        transferTexts.add(
+            MetroInfo.MetroStationTransferText.builder()
+                .text("换乘" + lineIdToLine.get(otherLineIds.get(i)).getLineName())
+                .xPos(stationWithTransfer.getXPos())
+                .yPos(point3.getY() + (i + 1) * request.getFontSize())
+                .build());
+      }
     }
 
     return SingleLineMetroInfo.builder()
@@ -490,6 +646,7 @@ public class MetroService {
         .stations(stations)
         .stationConnections(connections)
         .stationTransfers(stationTransfers)
+        .transferTexts(transferTexts)
         .build();
   }
 }

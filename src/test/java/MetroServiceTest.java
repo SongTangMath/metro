@@ -14,6 +14,14 @@ public class MetroServiceTest {
   }
 
   @Test
+  public void testBeijingLine1MetroInfo() {
+    SingleLineMetroInfo singleLineMetroInfo =
+        metroService.singleLineMetroInfo(
+            MetroInfoRequest.builder().cityId(CityEnum.BEIJING.getId()).lineName("1号线八通线").build());
+    System.out.println(JsonUtil.formatCamelCase(singleLineMetroInfo));
+  }
+
+  @Test
   public void testBeijingLine13MetroInfo() {
     SingleLineMetroInfo singleLineMetroInfo =
         metroService.singleLineMetroInfo(

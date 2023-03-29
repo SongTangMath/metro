@@ -83,6 +83,18 @@ public class MetroInfo {
     private List<MetroStationConnection> stationConnections;
     // 换乘站标志.
     private List<MetroStationConnection> stationTransfers;
+    private List<MetroStationTransferText> transferTexts;
+  }
+
+  @AllArgsConstructor
+  @NoArgsConstructor
+  @Data
+  @Builder
+  public static class MetroStationTransferText {
+    private String text;
+    private Double xPos;
+
+    private Double yPos;
   }
 
   @AllArgsConstructor
@@ -92,15 +104,17 @@ public class MetroInfo {
   public static class MetroStationConnection {
 
     private List<MetroStationConnectionLine> lines;
+    // 当前区域要填充的颜色
+    private String color;
   }
 
   @AllArgsConstructor
   @NoArgsConstructor
   @Data
   @Builder
+  @JsonInclude(Include.NON_NULL)
   public static class MetroStationConnectionLine { // "line","arc"
     private String lineType;
-
     private Double lineStartX;
     private Double lineStartY;
     private Double lineEndX;
@@ -112,5 +126,15 @@ public class MetroInfo {
     private Double arcStartAngle;
     private Double arcEndAngle;
     private Boolean isCounterClockWise;
+
+    public static MetroStationConnectionLine constructFromPoints(Point point1, Point point2) {
+      return MetroStationConnectionLine.builder()
+          .lineType(MetroStationLineTypeEnum.LINE.getIdentifier())
+          .lineStartX(point1.getX())
+          .lineStartY(point1.getY())
+          .lineEndX(point2.getX())
+          .lineEndY(point2.getY())
+          .build();
+    }
   }
 }
