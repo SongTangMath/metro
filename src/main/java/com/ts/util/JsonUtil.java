@@ -1,4 +1,4 @@
-package com.ts;
+package com.ts.util;
 
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.type.TypeReference;

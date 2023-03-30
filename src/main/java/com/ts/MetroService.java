@@ -1,11 +1,19 @@
 package com.ts;
 
-import com.ts.MetroInfo.MetroLine;
-import com.ts.MetroInfo.MetroStation;
-import com.ts.MetroInfo.MetroStationConnection;
-import com.ts.MetroInfo.MetroStationConnectionLine;
-import com.ts.MetroInfo.MetroTransferLine;
-import com.ts.MetroInfo.SingleLineMetroInfo;
+import com.ts.constants.CityEnum;
+import com.ts.constants.ConnectionTypeEnum;
+import com.ts.constants.MetroStationLineTypeEnum;
+import com.ts.dto.CityWithMetroResponse;
+import com.ts.dto.MetroInfo;
+import com.ts.dto.MetroInfo.MetroBranchLine;
+import com.ts.dto.MetroInfo.MetroLine;
+import com.ts.dto.MetroInfo.MetroStation;
+import com.ts.dto.MetroInfo.MetroStationConnection;
+import com.ts.dto.MetroInfo.MetroStationConnectionLine;
+import com.ts.dto.MetroInfo.MetroTransferLine;
+import com.ts.dto.MetroInfo.SingleLineMetroInfo;
+import com.ts.dto.MetroInfoRequest;
+import com.ts.dto.Point;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -16,22 +24,42 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 @Service
 @Slf4j
 public class MetroService {
 
+  public CityWithMetroResponse allCityMetroInfo() {
+
+    List<MetroInfo> metroInfos = Arrays.asList(beijingMetroInfo(), guangzhouMetroInfo());
+    for (MetroInfo metroInfo : metroInfos) {
+      metroInfo.calculateStationCount();
+    }
+    return new CityWithMetroResponse(metroInfos);
+  }
+
   public MetroInfo metroInfo(MetroInfoRequest request) {
+    MetroInfo metroInfo = null;
     switch (CityEnum.fromId(request.getCityId())) {
       case BEIJING:
-        return beijingMetroInfo();
+        metroInfo = beijingMetroInfo();
+        break;
+      case GUANGZHOU:
+        metroInfo = guangzhouMetroInfo();
+        break;
       default:
         return null;
     }
+    metroInfo.calculateStationCount();
+    return metroInfo;
   }
 
   public MetroInfo beijingMetroInfo() {
-    // https://map.bjsubway.com/
+    // 线路图 https://map.bjsubway.com/
+    // 颜色 https://www.bilibili.com/read/cv19838337/ 这个颜色和上面官网线路图的有些不同,但是似乎更准一些
+    // M24(S1线) M25(房山线) M26(亦庄线) M27(昌平线)
+    // 首都机场线(id=50),大兴机场线,西郊线
 
     List<MetroLine> lines =
         Arrays.asList(
@@ -45,7 +73,7 @@ public class MetroService {
                         "南礼士路", "复兴门", "西单", "天安门西", "天安门东", "王府井", "东单", "建国门", "永安里", "国贸", "大望路",
                         "四惠", "四惠东", "高碑店", "传媒大学", "双桥", "管庄", "八里桥", "通州北苑", "果园", "九棵树", "梨园",
                         "临河里", "土桥", "花庄", "环球度假区"))
-                .color("#c23a30")
+                .color("#a4343a")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -55,7 +83,12 @@ public class MetroService {
                     Arrays.asList(
                         "西直门", "积水潭", "鼓楼大街", "安定门", "雍和宫", "东直门", "东四十条", "朝阳门", "建国门", "北京站",
                         "崇文门", "前门", "和平门", "宣武门", "长椿街", "复兴门", "车公庄", "阜成门"))
-                .color("#006098")
+                .color("#004b87")
+                .isLoopLine(true)
+                .topStationNames(Arrays.asList("积水潭", "鼓楼大街", "安定门", "雍和宫"))
+                .rightStationNames(Arrays.asList("东直门", "东四十条", "朝阳门", "建国门"))
+                .bottomStationNames(Arrays.asList("北京站", "崇文门", "前门", "和平门", "宣武门"))
+                .leftStationNames(Arrays.asList("长椿街", "复兴门", "车公庄", "阜成门", "西直门"))
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -67,7 +100,7 @@ public class MetroService {
                         "动物园", "西直门", "新街口", "平安里", "西四", "灵境胡同", "西单", "宣武门", "菜市口", "陶然亭", "北京南站",
                         "马家堡", "角门西", "公益西桥", "新宫", "西红门", "高米店北", "高米店南", "枣园", "清源路", "黄村西大街",
                         "黄村火车站", "义和庄", "生物医药基地", "天宫院"))
-                .color("#008E9C")
+                .color("#008c95")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -78,7 +111,7 @@ public class MetroService {
                         "天通苑北", "天通苑", "天通苑南", "立水桥", "立水桥南", "北苑路北", "大屯路东", "惠新西街北口", "惠新西街南口",
                         "和平西桥", "和平里北街", "雍和宫", "北新桥", "张自忠路", "东四", "灯市口", "东单", "崇文门", "磁器口",
                         "天坛东门", "蒲黄榆", "刘家窑", "宋家庄"))
-                .color("#A6217F")
+                .color("#aa0061")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -90,42 +123,50 @@ public class MetroService {
                         "二里沟", "车公庄西", "车公庄", "平安里", "北海北", "南锣鼓巷", "东四", "朝阳门", "东大桥", "呼家楼",
                         "金台路", "十里铺", "青年路", "褡裢坡", "黄渠", "常营", "草房", "物资学院路", "通州北关", "通运门",
                         "北运河西", "北运河东", "郝家府", "东夏园", "潞城"))
-                .color("#D29700")
+                .color("#b58500")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(7)
                 .lineName("7号线")
                 .stationNames(Arrays.asList())
-                .color("#f6c582")
+                .color("#ffc56e")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(8)
                 .lineName("8号线")
                 .stationNames(Arrays.asList())
-                .color("#009B6B")
+                .color("#009b77")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(9)
                 .lineName("9号线")
                 .stationNames(Arrays.asList())
-                .color("#8FC31F")
+                .color("#97d700")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(10)
                 .lineName("10号线")
                 .stationNames(Arrays.asList())
-                .color("#009BC0")
+                .color("#0092bc")
+                .isLoopLine(true)
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(11)
                 .lineName("11号线")
                 .stationNames(Arrays.asList())
-                .color("#ed796b")
+                .color("#ff8674")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(12)
+                .lineName("12号线")
+                .stationNames(Arrays.asList())
+                .color("#9c4f01")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -135,21 +176,49 @@ public class MetroService {
                     Arrays.asList(
                         "西直门", "大钟寺", "知春路", "五道口", "上地", "清河站", "西二旗", "龙泽", "回龙观", "霍营", "立水桥",
                         "北苑", "望京西", "芍药居", "光熙门", "柳芳", "东直门"))
-                .color("#f9e700")
+                .color("#f4da40")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(14)
                 .lineName("14号线")
                 .stationNames(Arrays.asList())
-                .color("#D5A7A1")
+                .color("#ca9a8e")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(15)
                 .lineName("15号线")
                 .stationNames(Arrays.asList())
-                .color("#5B2C68")
+                .color("#653279")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(16)
+                .lineName("16号线")
+                .stationNames(Arrays.asList())
+                .color("#6ba539")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(17)
+                .lineName("17号线")
+                .stationNames(Arrays.asList())
+                .color("#00abab")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(19)
+                .lineName("19号线")
+                .stationNames(Arrays.asList())
+                .color("#d3a3c9")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(22)
+                .lineName("平谷线")
+                .stationNames(Arrays.asList())
+                .color("#f4c1ca")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -160,17 +229,31 @@ public class MetroService {
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
+                .lineId(25)
+                .lineName("房山线燕房线")
+                .stationNames(Arrays.asList())
+                .color("#d86018")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
+                .lineId(26)
+                .lineName("亦庄线")
+                .stationNames(Arrays.asList())
+                .color("#d0006f")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.BEIJING.getId())
                 .lineId(27)
                 .lineName("昌平线")
                 .stationNames(Arrays.asList())
-                .color("#DE82B2")
+                .color("#d986ba")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(50)
                 .lineName("首都机场线")
                 .stationNames(Arrays.asList())
-                .color("#A29BBB")
+                .color("#a192b2")
                 .build());
 
     List<MetroStation> line1Stations =
@@ -192,7 +275,7 @@ public class MetroService {
             MetroStation.builder().stationName("天安门东").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("王府井").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("东单").lineIds(Arrays.asList(1, 5)).build(),
-            MetroStation.builder().stationName("建国门").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("建国门").lineIds(Arrays.asList(1, 2)).build(),
             MetroStation.builder().stationName("永安里").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("国贸").lineIds(Arrays.asList(1, 10)).build(),
             MetroStation.builder().stationName("大望路").lineIds(Arrays.asList(1, 14)).build(),
@@ -373,17 +456,274 @@ public class MetroService {
             .flatMap(Collection::stream)
             .collect(Collectors.toList());
 
-    Map<String, MetroStation> stationNameToStation =
-        stations
-            .stream()
-            .collect(Collectors.toMap(MetroStation::getStationName, Function.identity()));
+    stations.stream().collect(Collectors.toMap(MetroStation::getStationName, Function.identity()));
 
     return MetroInfo.builder()
         .cityId(CityEnum.BEIJING.getId())
         .cityName(CityEnum.BEIJING.getName())
         .lines(lines)
         .stations(stations)
-        .stationNameToStation(stationNameToStation)
+        .build();
+  }
+
+  public MetroInfo guangzhouMetroInfo() {
+    // https://cs.gzmtr.com/ckfw/xlu_2020/202011/W020221227789185419694.png
+    // 线路颜色 https://www.bilibili.com/read/cv13783696/
+    // 佛山地铁线路颜色 https://www.bilibili.com/read/cv19915012/
+    // apm线(id=23) 海珠有轨1号线(24) 黄埔有轨1号线(25)
+    // 广佛线(26) 佛山2号线(27) 佛山3号线(28)
+
+    List<MetroLine> lines =
+        Arrays.asList(
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(1)
+                .lineName("1号线")
+                .stationNames(
+                    Arrays.asList(
+                        "西塱", "坑口", "花地湾", "芳村", "黄沙", "长寿路", "陈家祠", "西门口", "公园前", "农讲所", "东山口",
+                        "杨箕", "体育西路", "体育中心", "广州东站"))
+                .color("#f3d03e")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(2)
+                .lineName("2号线")
+                .stationNames(
+                    Arrays.asList(
+                        "广州南站", "石壁", "会江", "南浦", "洛溪", "南洲", "东晓南", "江泰路", "昌岗", "江南西", "市二宫",
+                        "海珠广场", "西门口", "纪念堂", "越秀公园", "广州火车站", "三元里", "飞翔公园", "白云公园", "白云文化广场",
+                        "萧岗", "江夏", "黄边", "嘉禾望岗"))
+                .color("#00629b")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(3)
+                .lineName("3号线")
+                .stationNames(
+                    Arrays.asList(
+                        "番禺广场", "市桥", "汉溪长隆", "大石", "厦滘", "沥滘", "大塘", "客村", "广州塔", "珠江新城", "体育西路",
+                        "石牌桥", "岗顶", "华师", "五山", "天河客运站"))
+                .branchLines(
+                    Arrays.asList(
+                        MetroBranchLine.builder()
+                            .branchLineName("3号线北延线")
+                            .branchLineStationNames(
+                                Arrays.asList(
+                                    "体育西路", "林和西", "广州东站", "燕塘", "梅花园", "京溪南方医院", "同和", "永泰",
+                                    "白云大道北", "嘉禾望岗", "龙归", "人和", "高增", "机场南", "机场北"))
+                            .build()))
+                .color("#eca154")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(4)
+                .lineName("4号线")
+                .stationNames(Arrays.asList())
+                .color("#00843d")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(5)
+                .lineName("5号线")
+                .stationNames(Arrays.asList())
+                .color("#c5003e")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(6)
+                .lineName("6号线")
+                .stationNames(Arrays.asList())
+                .color("#80225f")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(7)
+                .lineName("7号线")
+                .stationNames(Arrays.asList())
+                .color("#97d700")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(8)
+                .lineName("8号线")
+                .stationNames(Arrays.asList())
+                .color("#008c95")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(9)
+                .lineName("9号线")
+                .stationNames(Arrays.asList())
+                .color("#71cc98")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(13)
+                .lineName("13号线")
+                .stationNames(Arrays.asList())
+                .color("#8e8c13")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(14)
+                .lineName("14号线")
+                .stationNames(Arrays.asList())
+                .color("#81312f")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(18)
+                .lineName("18号线")
+                .stationNames(Arrays.asList())
+                .color("#0047ba")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(21)
+                .lineName("21号线")
+                .stationNames(Arrays.asList())
+                .color("#201747")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(22)
+                .lineName("22号线")
+                .stationNames(Arrays.asList())
+                .color("#cd5228")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(23)
+                .lineName("apm线")
+                .stationNames(Arrays.asList())
+                .color("#00b5e2")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(24)
+                .lineName("有轨电车THZ1线")
+                .stationNames(Arrays.asList())
+                .color("#43b02a")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(25)
+                .lineName("黄埔有轨电车1号线")
+                .stationNames(Arrays.asList())
+                .color("#d42d1b")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(26)
+                .lineName("广佛线")
+                .stationNames(Arrays.asList())
+                .color("#c4d600")
+                .build(),
+            MetroLine.builder()
+                .cityId(CityEnum.GUANGZHOU.getId())
+                .lineId(27)
+                .lineName("佛山2号线")
+                .stationNames(Arrays.asList())
+                .color("#f5333f")
+                .build());
+
+    List<MetroStation> line1Stations =
+        Arrays.asList(
+            MetroStation.builder().stationName("西塱").lineIds(Arrays.asList(1, 26)).build(),
+            MetroStation.builder().stationName("坑口").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("花地湾").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("芳村").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("黄沙").lineIds(Arrays.asList(1, 6)).build(),
+            MetroStation.builder().stationName("长寿路").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("陈家祠").lineIds(Arrays.asList(1, 8)).build(),
+            MetroStation.builder().stationName("西门口").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("公园前").lineIds(Arrays.asList(1, 2)).build(),
+            MetroStation.builder().stationName("农讲所").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("东山口").lineIds(Arrays.asList(1, 6)).build(),
+            MetroStation.builder().stationName("杨箕").lineIds(Arrays.asList(1, 5)).build(),
+            MetroStation.builder().stationName("体育西路").lineIds(Arrays.asList(1, 3)).build(),
+            MetroStation.builder().stationName("体育中心").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("广州东站").lineIds(Arrays.asList(1, 3)).build());
+
+    List<MetroStation> line2Stations =
+        Arrays.asList(
+            MetroStation.builder().stationName("广州南站").lineIds(Arrays.asList(2, 22, 7, 27)).build(),
+            MetroStation.builder().stationName("石壁").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("会江").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("南浦").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("洛溪").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("南洲").lineIds(Arrays.asList(2, 26)).build(),
+            MetroStation.builder().stationName("东晓南").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("江泰路").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("昌岗").lineIds(Arrays.asList(2, 8)).build(),
+            MetroStation.builder().stationName("江南西").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("市二宫").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("海珠广场").lineIds(Arrays.asList(2, 6)).build(),
+            // MetroStation.builder().stationName("公园前").lineIds(Arrays.asList(1, 2)).build(),
+            MetroStation.builder().stationName("纪念堂").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("越秀公园").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("广州火车站").lineIds(Arrays.asList(2, 5)).build(),
+            MetroStation.builder().stationName("三元里").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("飞翔公园").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("白云公园").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("白云文化广场").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("萧岗").lineIds(Arrays.asList(2, 5)).build(),
+            MetroStation.builder().stationName("江夏").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("黄边").lineIds(Arrays.asList(2)).build(),
+            MetroStation.builder().stationName("嘉禾望岗").lineIds(Arrays.asList(2, 3)).build());
+
+    List<MetroStation> line3Stations =
+        Arrays.asList(
+            MetroStation.builder().stationName("番禺广场").lineIds(Arrays.asList(3, 18, 22)).build(),
+            MetroStation.builder().stationName("市桥").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("汉溪长隆").lineIds(Arrays.asList(3, 7)).build(),
+            MetroStation.builder().stationName("大石").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("厦滘").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("沥滘").lineIds(Arrays.asList(3, 26)).build(),
+            MetroStation.builder().stationName("大塘").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("客村").lineIds(Arrays.asList(3, 8)).build(),
+            MetroStation.builder().stationName("广州塔").lineIds(Arrays.asList(3, 23)).build(),
+            MetroStation.builder().stationName("珠江新城").lineIds(Arrays.asList(3, 5)).build(),
+            // MetroStation.builder().stationName("体育西路").lineIds(Arrays.asList(1, 3)).build(),
+            MetroStation.builder().stationName("石牌桥").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("岗顶").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("华师").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("五山").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("天河客运站").lineIds(Arrays.asList(3, 6)).build(),
+            MetroStation.builder().stationName("林和西").lineIds(Arrays.asList(3, 23)).build(),
+            //    MetroStation.builder().stationName("广州东站").lineIds(Arrays.asList(1, 3)).build(),
+            MetroStation.builder().stationName("燕塘").lineIds(Arrays.asList(3, 6)).build(),
+            MetroStation.builder().stationName("梅花园").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("京溪南方医院").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("同和").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("永泰").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("白云大道北").lineIds(Arrays.asList(3)).build(),
+            //  MetroStation.builder().stationName("嘉禾望岗").lineIds(Arrays.asList(2, 3, 14)).build(),
+            MetroStation.builder().stationName("龙归").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("人和").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("高增").lineIds(Arrays.asList(3, 9)).build(),
+            MetroStation.builder().stationName("机场南").lineIds(Arrays.asList(3)).build(),
+            MetroStation.builder().stationName("机场北").lineIds(Arrays.asList(3)).build());
+
+    System.out.println(
+        line3Stations
+            .stream()
+            .map(o -> String.format("\"%s\"", o.getStationName()))
+            .collect(Collectors.joining(",")));
+
+    List<MetroStation> stations =
+        Stream.of(line1Stations, line2Stations, line3Stations)
+            .flatMap(Collection::stream)
+            .collect(Collectors.toList());
+
+    stations.stream().collect(Collectors.toMap(MetroStation::getStationName, Function.identity()));
+
+    return MetroInfo.builder()
+        .cityId(CityEnum.GUANGZHOU.getId())
+        .cityName(CityEnum.GUANGZHOU.getName())
+        .lines(lines)
+        .stations(stations)
         .build();
   }
 
@@ -393,6 +733,9 @@ public class MetroService {
       case BEIJING:
         allCityMetroInfo = beijingMetroInfo();
         break;
+      case GUANGZHOU:
+        allCityMetroInfo = guangzhouMetroInfo();
+        break;
       default:
         return null;
     }
@@ -400,7 +743,7 @@ public class MetroService {
         allCityMetroInfo
             .getLines()
             .stream()
-            .filter(o -> o.getLineName().equals(request.getLineName()))
+            .filter(o -> o.getLineId().equals(request.getLineId()))
             .collect(Collectors.toList())
             .get(0);
 
@@ -411,9 +754,9 @@ public class MetroService {
             .filter(o -> o.getLineIds().contains(line.getLineId()))
             .collect(Collectors.toMap(MetroStation::getStationName, Function.identity()));
 
-    List<MetroStation> stations =
+    List<MetroStation> mainLineStations =
         line.getStationNames().stream().map(stationNameToStation::get).collect(Collectors.toList());
-
+    List<MetroStation> allStations = new ArrayList<>(mainLineStations);
     Map<Integer, MetroLine> lineIdToLine =
         allCityMetroInfo
             .getLines()
@@ -421,75 +764,106 @@ public class MetroService {
             .collect(Collectors.toMap(MetroLine::getLineId, Function.identity()));
 
     // 计算单线路绘图的坐标信息.对于非环线,线路图为直线.站点的y坐标为canvas.height/2 x轴分成(站点个数+1)份.
-    for (int i = 0; i < stations.size(); i++) {
-      stations.get(i).setXPos((i + 1) * request.getCanvasWidth() / (stations.size() + 1.0));
-      stations.get(i).setYPos(request.getCanvasHeight() / 2.0);
+
+    // 考虑x轴上最多有多少个站点.如果没有支线则有  line.getStationNames().size()个站点.否则从主线上找到分叉的位置.
+    int xAxisStations = line.getStationNames().size();
+    if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+      for (MetroBranchLine branchLine : line.getBranchLines()) {
+        // 从这个站点开始分叉
+        String splitStationName = branchLine.getBranchLineStationNames().get(0);
+        int index = line.getStationNames().indexOf(splitStationName);
+        xAxisStations =
+            Math.max(xAxisStations, index + branchLine.getBranchLineStationNames().size());
+      }
     }
+
+    double stationXDistance = request.getCanvasWidth() / (xAxisStations + 1.0);
+
+    int allLinesCount = 1;
+    if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+      allLinesCount += line.getBranchLines().size();
+    }
+
+    double stationYDistance = request.getCanvasHeight() / (allLinesCount + 1.0);
+
+    // 先计算主线上的站点位置
+    for (int i = 0; i < mainLineStations.size(); i++) {
+      mainLineStations.get(i).setXPos((i + 1) * stationXDistance);
+      // 主线位于最下方(注意y轴正向向下
+      mainLineStations
+          .get(i)
+          .setYPos(allLinesCount / (allLinesCount + 1.0) * request.getCanvasHeight());
+    }
+    // 再计算各支线站点位置.注意分叉站的位置已经算好.这里暂不考虑分支线路又汇入主线或者有交叉的情况
+
+    if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+      for (int i = 0; i < line.getBranchLines().size(); i++) {
+
+        MetroBranchLine branchLine = line.getBranchLines().get(i);
+        MetroStation splitStation =
+            stationNameToStation.get(
+                line.getBranchLines().get(i).getBranchLineStationNames().get(0));
+        branchLine.setSplitStation(splitStation);
+        branchLine.setBranchLineStations(new ArrayList<>());
+        for (int j = 1; j < branchLine.getBranchLineStationNames().size(); j++) {
+          MetroStation station =
+              stationNameToStation.get(branchLine.getBranchLineStationNames().get(j));
+
+          // 支线位置位于分叉站右上方(注意y轴向下是正向)
+          station.setXPos(splitStation.getXPos() + j * stationXDistance);
+          station.setYPos(splitStation.getYPos() - (i + 1) * stationYDistance);
+
+          branchLine.getBranchLineStations().add(station);
+          allStations.add(station);
+        }
+      }
+    }
+
     // 计算站点间连线数据.对于非环线,n个站点需要n-1个"线段"连接.每个线段为矩形,左右两边为凹进来的半圆. canvas绘图表现为arc+line+arc+line
     // 注意canvas绘图中原点是左上角且y轴方向向下
     List<MetroStationConnection> connections = new ArrayList<>();
 
-    for (int i = 0; i < stations.size() - 1; i++) {
-
-      // 左站点的右弧.逆时针 圆心为左站点中心.半径从请求中传入
-
-      Double theta = Math.asin(request.getConnectionLineWidth() / 2.0 / request.getStationRadius());
-      MetroStationConnectionLine leftStationRightArc =
-          MetroStationConnectionLine.builder()
-              .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
-              .arcCenterX(stations.get(i).getXPos())
-              .arcCenterY(stations.get(i).getYPos())
-              .radius(request.getStationRadius())
-              .arcStartAngle(theta)
-              .arcEndAngle(-theta)
-              .isCounterClockWise(true)
-              .build();
-      // 挖掉半圆的矩形的顶部线段
-      MetroStationConnectionLine topLine =
-          MetroStationConnectionLine.builder()
-              .lineType(MetroStationLineTypeEnum.LINE.getIdentifier())
-              .lineStartX(stations.get(i).getXPos() + request.getStationRadius() * Math.cos(theta))
-              .lineStartY(stations.get(i).getYPos() - request.getStationRadius() * Math.sin(theta))
-              .lineEndX(
-                  stations.get(i + 1).getXPos() - request.getStationRadius() * Math.cos(theta))
-              .lineEndY(
-                  stations.get(i + 1).getYPos() - request.getStationRadius() * Math.sin(theta))
-              .build();
-
-      MetroStationConnectionLine rightStationLeftArc =
-          MetroStationConnectionLine.builder()
-              .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
-              .arcCenterX(stations.get(i + 1).getXPos())
-              .arcCenterY(stations.get(i + 1).getYPos())
-              .radius(request.getStationRadius())
-              .arcStartAngle(Math.PI + theta)
-              .arcEndAngle(Math.PI - theta)
-              .isCounterClockWise(true)
-              .build();
-
-      MetroStationConnectionLine bottomLine =
-          MetroStationConnectionLine.builder()
-              .lineType(MetroStationLineTypeEnum.LINE.getIdentifier())
-              .lineStartX(
-                  stations.get(i + 1).getXPos() - request.getStationRadius() * Math.cos(theta))
-              .lineStartY(
-                  stations.get(i + 1).getYPos() + request.getStationRadius() * Math.sin(theta))
-              .lineEndX(stations.get(i).getXPos() + request.getStationRadius() * Math.cos(theta))
-              .lineEndY(stations.get(i).getYPos() + request.getStationRadius() * Math.sin(theta))
-              .build();
-
+    for (int i = 0; i < mainLineStations.size() - 1; i++) {
       connections.add(
-          MetroStationConnection.builder()
-              .lines(Arrays.asList(leftStationRightArc, topLine, rightStationLeftArc, bottomLine))
-              .color(line.getColor())
-              .build());
+          calculateConnection(
+              line,
+              mainLineStations.get(i),
+              mainLineStations.get(i + 1),
+              ConnectionTypeEnum.HORIZONTAL,
+              request));
     }
+
+    if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+      for (MetroBranchLine branchLine : line.getBranchLines()) {
+
+        connections.add(
+            calculateConnection(
+                line,
+                branchLine.getSplitStation(),
+                branchLine.getBranchLineStations().get(0),
+                ConnectionTypeEnum.LEFT_TO_TOP,
+                request));
+
+        // 非分叉站之间的连线
+        for (int i = 0; i < branchLine.getBranchLineStations().size() - 1; i++) {
+          connections.add(
+              calculateConnection(
+                  line,
+                  branchLine.getBranchLineStations().get(i),
+                  branchLine.getBranchLineStations().get(i + 1),
+                  ConnectionTypeEnum.HORIZONTAL,
+                  request));
+        }
+      }
+    }
+
+    // 如果有支线,支线的站点也拼上得到所有站点
 
     // 拼接换乘站相关信息 注意在此之前已经计算了各站点的绘图位置
     List<MetroStationConnection> stationTransfers = new ArrayList<>();
     List<MetroInfo.MetroStationTransferText> transferTexts = new ArrayList<>();
     for (MetroStation stationWithTransfer :
-        stations.stream().filter(o -> o.getLineIds().size() > 1).collect(Collectors.toList())) {
+        allStations.stream().filter(o -> o.getLineIds().size() > 1).collect(Collectors.toList())) {
 
       List<Integer> otherLineIds =
           stationWithTransfer
@@ -579,6 +953,7 @@ public class MetroService {
 
           break;
         case 2:
+        default:
           {
             // 第0换乘线顶部半圆
             MetroStationConnectionLine transferLine0TopArc =
@@ -624,15 +999,13 @@ public class MetroService {
                     .build());
           }
           break;
-        default:
-          break;
       }
 
       // 在point3下方10位置处添加文本
       for (int i = 0; i < otherLineIds.size(); i++) {
         transferTexts.add(
             MetroInfo.MetroStationTransferText.builder()
-                .text("换乘" + lineIdToLine.get(otherLineIds.get(i)).getLineName())
+                .text(lineIdToLine.get(otherLineIds.get(i)).getLineName())
                 .xPos(stationWithTransfer.getXPos())
                 .yPos(point3.getY() + (i + 1) * request.getFontSize())
                 .build());
@@ -643,10 +1016,196 @@ public class MetroService {
         .lineId(line.getLineId())
         .lineName(line.getLineName())
         .color(line.getColor())
-        .stations(stations)
+        .stations(allStations)
         .stationConnections(connections)
         .stationTransfers(stationTransfers)
         .transferTexts(transferTexts)
+        .build();
+  }
+
+  private MetroStationConnection calculateConnection(
+      MetroLine line,
+      MetroStation first,
+      MetroStation second,
+      ConnectionTypeEnum connectionType,
+      MetroInfoRequest request) {
+    List<MetroStationConnectionLine> connectionLines = new ArrayList<>();
+    Double theta = Math.asin(request.getConnectionLineWidth() / 2.0 / request.getStationRadius());
+    switch (connectionType) {
+      case HORIZONTAL:
+        {
+          MetroStationConnectionLine leftStationRightArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(first.getXPos())
+                  .arcCenterY(first.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(theta)
+                  .arcEndAngle(-theta)
+                  .isCounterClockWise(true)
+                  .build();
+          // 挖掉半圆的矩形的顶部线段
+          MetroStationConnectionLine topLine =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.LINE.getIdentifier())
+                  .lineStartX(first.getXPos() + request.getStationRadius() * Math.cos(theta))
+                  .lineStartY(first.getYPos() - request.getStationRadius() * Math.sin(theta))
+                  .lineEndX(second.getXPos() - request.getStationRadius() * Math.cos(theta))
+                  .lineEndY(second.getYPos() - request.getStationRadius() * Math.sin(theta))
+                  .build();
+
+          MetroStationConnectionLine rightStationLeftArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(second.getXPos())
+                  .arcCenterY(second.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(Math.PI + theta)
+                  .arcEndAngle(Math.PI - theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          MetroStationConnectionLine bottomLine =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.LINE.getIdentifier())
+                  .lineStartX(second.getXPos() - request.getStationRadius() * Math.cos(theta))
+                  .lineStartY(second.getYPos() + request.getStationRadius() * Math.sin(theta))
+                  .lineEndX(first.getXPos() + request.getStationRadius() * Math.cos(theta))
+                  .lineEndY(first.getYPos() + request.getStationRadius() * Math.sin(theta))
+                  .build();
+
+          connectionLines =
+              Arrays.asList(leftStationRightArc, topLine, rightStationLeftArc, bottomLine);
+          break;
+        }
+
+      case LEFT_TO_TOP:
+        {
+
+          // 上弧起点(逆时针)
+          Point point1 =
+              new Point(
+                  first.getXPos() + request.getStationRadius() * Math.sin(theta),
+                  first.getYPos() - request.getStationRadius() * Math.cos(theta));
+
+          // 上弧终点
+          Point point2 =
+              new Point(
+                  first.getXPos() - request.getStationRadius() * Math.sin(theta), point1.getY());
+
+          // 外侧曲线由一条垂线,一段顺时针弧,一条水平线构成.圆角矩形的圆角圆心.内外侧圆弧为同心圆弧.
+
+          // point2,3 x相同. point1,4 x相同.
+          Point point3 =
+              new Point(
+                  point2.getX(), second.getYPos() + request.getStationRadius() * Math.sin(theta));
+
+          Point point4 =
+              new Point(
+                  point1.getX(), second.getYPos() - request.getStationRadius() * Math.sin(theta));
+          // point4,5 y相同
+          Point point5 =
+              new Point(
+                  second.getXPos() - request.getStationRadius() * Math.cos(theta), point4.getY());
+          // point3,6 y相同
+          Point point6 =
+              new Point(
+                  second.getXPos() - request.getStationRadius() * Math.cos(theta), point3.getY());
+
+          // point7为内侧圆弧上点.这里先设置内弧半径为0.7,8,圆心重合
+          Point point7 = new Point(point1.getX(), point3.getY());
+          // point7为内侧圆弧左点
+          Point point8 = new Point(point1.getX(), point3.getY());
+
+          Point circleCenter = new Point(point1.getX(), point3.getY());
+          Double outerLineRadius = circleCenter.getX() - point3.getX();
+          Double innerLineRadius = 0.0;
+
+          // 左边站点的上弧
+          MetroStationConnectionLine leftStationTopArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(first.getXPos())
+                  .arcCenterY(first.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(Math.PI * 3 / 2 + theta)
+                  .arcEndAngle(Math.PI * 3 / 2 - theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 外侧曲线的垂线
+          MetroStationConnectionLine outerLineVerticalLine =
+              MetroStationConnectionLine.constructFromPoints(point2, point3);
+          // 外侧曲线的圆弧(point2->point3)
+
+          MetroStationConnectionLine outerLineArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(circleCenter.getX())
+                  .arcCenterY(circleCenter.getY())
+                  .radius(outerLineRadius)
+                  .arcStartAngle(Math.PI)
+                  .arcEndAngle(Math.PI * 3 / 2)
+                  .build();
+
+          // 外侧曲线的水平线
+          MetroStationConnectionLine outerLineHorizontalLine =
+              MetroStationConnectionLine.constructFromPoints(point4, point5);
+
+          // 右边站点的左弧
+          MetroStationConnectionLine rightStationLeftArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(second.getXPos())
+                  .arcCenterY(second.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(Math.PI + theta)
+                  .arcEndAngle(Math.PI - theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 内侧曲线的水平线
+          MetroStationConnectionLine innerLineHorizontalLine =
+              MetroStationConnectionLine.constructFromPoints(point6, point7);
+
+          MetroStationConnectionLine innerLineArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(circleCenter.getX())
+                  .arcCenterY(circleCenter.getY())
+                  .radius(innerLineRadius)
+                  .arcStartAngle(Math.PI * 3 / 2)
+                  .arcEndAngle(Math.PI)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 内侧曲线的水平线
+          MetroStationConnectionLine innerLineVerticalLine =
+              MetroStationConnectionLine.constructFromPoints(point8, point1);
+
+          connectionLines =
+              Arrays.asList(
+                  leftStationTopArc,
+                  outerLineVerticalLine,
+                  outerLineArc,
+                  outerLineHorizontalLine,
+                  rightStationLeftArc,
+                  innerLineHorizontalLine,
+                  innerLineArc,
+                  innerLineVerticalLine);
+
+          break;
+        }
+      default:
+        break;
+    }
+
+    // 左站点的右弧.逆时针 圆心为左站点中心.半径从请求中传入
+
+    return MetroStationConnection.builder()
+        .lines(connectionLines)
+        .color(line.getColor())
+        .name(String.format("%sto%s", first.getStationName(), second.getStationName()))
         .build();
   }
 }

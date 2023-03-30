@@ -1,4 +1,4 @@
-package com.ts;
+package com.ts.constants;
 
 import java.util.HashMap;
 import java.util.Map;

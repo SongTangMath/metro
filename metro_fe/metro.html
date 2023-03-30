@@ -12,6 +12,7 @@
       rel="stylesheet"
       href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
   />
+
   <style>
     header {
       text-align: center;
@@ -21,25 +22,25 @@
       margin: 0 auto;
       display: block;
     }
-    .for-canvas {
-      display: none;
-    }
+
   </style>
 </head>
 <body>
-<canvas id="metro-canvas" width="1500" height="500"> </canvas>
+
+
+
+<canvas id="metro-canvas" width="2000" height="500"> </canvas>
 </body>
 <script src="metro_data.js"></script>
 <script>
   function draw(turnImg) {
+    // let metro_data = beijing_4;
+    let metro_data = beijing_2;
     let canvas = document.getElementById("metro-canvas");
     let ctx = canvas.getContext("2d");
 
-    let stations = beijing_data.stations;
-
+    let stations = metro_data.stations;
     let stationRadius = 10;
-    let lineWidthBetweenStation = 10;
-    let stationXPos = [];
 
     //计算坐标.x轴分成(站点数+1)份.
     for (let i = 0; i < stations.length; i++) {
@@ -78,11 +79,11 @@
       ctx.textAlign = "left";
       ctx.font = "15px Microsoft Yahei";
       ctx.fillStyle = "black";
-      ctx.fillText(stations[i].stationName, 15, 0);
+      ctx.fillText(stations[i].stationName, 25, 0);
       ctx.restore();
     }
 
-    for (connectionLine of [...beijing_data.stationConnections,...beijing_data.stationTransfers]) {
+    for (connectionLine of [...metro_data.stationConnections,...metro_data.stationTransfers]) {
       ctx.beginPath();
       ctx.fillStyle = connectionLine.color;
       for (line of connectionLine.lines) {
@@ -105,10 +106,10 @@
     }
 
     
-    for (transferText of beijing_data.transferTexts) {
+    for (transferText of metro_data.transferTexts) {
       ctx.save();
       ctx.translate(transferText.xpos, transferText.ypos);
-      ctx.rotate(-Math.PI / 4);
+      // ctx.rotate(-Math.PI / 4);
       ctx.textAlign = "center";
       ctx.font = "15px Microsoft Yahei";
       ctx.fillStyle = "black";

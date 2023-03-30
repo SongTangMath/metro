@@ -1,13 +1,14 @@
-package com.ts;
+package com.ts.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.ts.constants.MetroStationLineTypeEnum;
 import java.util.List;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.util.CollectionUtils;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,10 +17,26 @@ import lombok.NoArgsConstructor;
 public class MetroInfo {
   private Integer cityId;
   private String cityName;
+  // 当前城市站点数
+  private Integer stationCount;
+
   private List<MetroLine> lines;
   private List<MetroStation> stations;
 
-  private Map<String, MetroStation> stationNameToStation;
+  public void calculateStationCount() {
+    this.stationCount = stations.size();
+    for (MetroLine line : lines) {
+      int stationCount = line.getStationNames().size();
+      if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+        for (MetroBranchLine branchLine : line.getBranchLines()) {
+          stationCount += branchLine.getBranchLineStationNames().size() - 1;
+        }
+      }
+      line.setStationCount(stationCount);
+      // 此接口不需要站点详情
+      this.stations = null;
+    }
+  }
 
   @AllArgsConstructor
   @NoArgsConstructor
@@ -64,9 +81,35 @@ public class MetroInfo {
     private String lineName;
     // #开头的16进制颜色
     private String color;
+
+    // 主线上的站点
     private List<String> stationNames;
     // 是否为环线,如北京10号线为环线
     private Boolean isLoopLine;
+    // 对于环线,绘图的时候需要更多信息.环线将会绘制为一个矩形.按照上右下左的顺序绘制站点,和计算站点位置
+    private List<String> topStationNames;
+    private List<String> rightStationNames;
+    private List<String> bottomStationNames;
+    private List<String> leftStationNames;
+
+    // 似乎暂时还没有多支线的线路
+    private List<MetroBranchLine> branchLines;
+    // 当前线路的总站点数
+    private Integer stationCount;
+  }
+
+  @AllArgsConstructor
+  @NoArgsConstructor
+  @Data
+  @Builder
+  public static class MetroBranchLine {
+    // 支线名称.如 "3号线北延段" (广州体育西路->机场北)
+    private String branchLineName;
+    private List<String> branchLineStationNames;
+
+    private MetroStation splitStation;
+    // 除去分叉的那一站外的其它站
+    private List<MetroStation> branchLineStations;
   }
 
   @AllArgsConstructor
@@ -103,9 +146,11 @@ public class MetroInfo {
   @Builder
   public static class MetroStationConnection {
 
-    private List<MetroStationConnectionLine> lines;
+    // for debug
+    private String name;
     // 当前区域要填充的颜色
     private String color;
+    private List<MetroStationConnectionLine> lines;
   }
 
   @AllArgsConstructor
@@ -113,7 +158,8 @@ public class MetroInfo {
   @Data
   @Builder
   @JsonInclude(Include.NON_NULL)
-  public static class MetroStationConnectionLine { // "line","arc"
+  public static class MetroStationConnectionLine {
+    // "line","arc"
     private String lineType;
     private Double lineStartX;
     private Double lineStartY;

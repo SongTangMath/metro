@@ -1,4 +1,4 @@
-package com.ts;
+package com.ts.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
