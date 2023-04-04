@@ -1,0 +1,1379 @@
+{
+  "lineId": 2,
+  "lineName": "2号线",
+  "color": "#004b87",
+  "stations": [
+    {
+      "stationName": "西直门",
+      "lineIds": [2, 4, 13],
+      "transferLines": [
+        { "lineId": 4, "lineName": "4号线大兴线", "color": "#008c95" },
+        { "lineId": 13, "lineName": "13号线", "color": "#f4da40" }
+      ],
+      "xpos": 105.26315789473684,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "积水潭",
+      "lineIds": [2, 19],
+      "transferLines": [
+        { "lineId": 19, "lineName": "19号线", "color": "#d3a3c9" }
+      ],
+      "xpos": 210.52631578947367,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "鼓楼大街",
+      "lineIds": [2, 8],
+      "transferLines": [
+        { "lineId": 8, "lineName": "8号线", "color": "#009b77" }
+      ],
+      "xpos": 315.7894736842105,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "安定门",
+      "lineIds": [2],
+      "xpos": 421.05263157894734,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "雍和宫",
+      "lineIds": [2, 5],
+      "transferLines": [
+        { "lineId": 5, "lineName": "5号线", "color": "#aa0061" }
+      ],
+      "xpos": 526.3157894736842,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "东直门",
+      "lineIds": [2, 13, 50],
+      "transferLines": [
+        { "lineId": 13, "lineName": "13号线", "color": "#f4da40" },
+        { "lineId": 50, "lineName": "首都机场线", "color": "#a192b2" }
+      ],
+      "xpos": 631.578947368421,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "东四十条",
+      "lineIds": [2],
+      "xpos": 736.8421052631578,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "朝阳门",
+      "lineIds": [2, 6],
+      "transferLines": [
+        { "lineId": 6, "lineName": "6号线", "color": "#b58500" }
+      ],
+      "xpos": 842.1052631578947,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "建国门",
+      "lineIds": [1, 2],
+      "transferLines": [
+        { "lineId": 1, "lineName": "1号线八通线", "color": "#a4343a" }
+      ],
+      "xpos": 947.3684210526316,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "北京站",
+      "lineIds": [2],
+      "xpos": 1052.6315789473683,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "崇文门",
+      "lineIds": [2, 5],
+      "transferLines": [
+        { "lineId": 5, "lineName": "5号线", "color": "#aa0061" }
+      ],
+      "xpos": 1157.8947368421052,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "前门",
+      "lineIds": [2, 8],
+      "transferLines": [
+        { "lineId": 8, "lineName": "8号线", "color": "#009b77" }
+      ],
+      "xpos": 1263.157894736842,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "和平门",
+      "lineIds": [2],
+      "xpos": 1368.421052631579,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "宣武门",
+      "lineIds": [2, 4],
+      "transferLines": [
+        { "lineId": 4, "lineName": "4号线大兴线", "color": "#008c95" }
+      ],
+      "xpos": 1473.6842105263156,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "长椿街",
+      "lineIds": [2],
+      "xpos": 1578.9473684210525,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "复兴门",
+      "lineIds": [1, 2],
+      "transferLines": [
+        { "lineId": 1, "lineName": "1号线八通线", "color": "#a4343a" }
+      ],
+      "xpos": 1684.2105263157894,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "车公庄",
+      "lineIds": [2, 6],
+      "transferLines": [
+        { "lineId": 6, "lineName": "6号线", "color": "#b58500" }
+      ],
+      "xpos": 1789.4736842105262,
+      "ypos": 250.0
+    },
+    {
+      "stationName": "阜成门",
+      "lineIds": [2],
+      "xpos": 1894.7368421052631,
+      "ypos": 250.0
+    }
+  ],
+  "stationConnections": [
+    {
+      "name": "西直门to积水潭",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 105.26315789473684,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 113.92341193258122,
+          "lineStartY": 245.0,
+          "lineEndX": 201.86606175162927,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 210.52631578947367,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 201.86606175162927,
+          "lineStartY": 255.0,
+          "lineEndX": 113.92341193258122,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "积水潭to鼓楼大街",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 210.52631578947367,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 219.18656982731807,
+          "lineStartY": 245.0,
+          "lineEndX": 307.12921964636615,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 315.7894736842105,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 307.12921964636615,
+          "lineStartY": 255.0,
+          "lineEndX": 219.18656982731807,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "鼓楼大街to安定门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 315.7894736842105,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 324.4497277220549,
+          "lineStartY": 245.0,
+          "lineEndX": 412.392377541103,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 421.05263157894734,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 412.392377541103,
+          "lineStartY": 255.0,
+          "lineEndX": 324.4497277220549,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "安定门to雍和宫",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 421.05263157894734,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 429.7128856167917,
+          "lineStartY": 245.0,
+          "lineEndX": 517.6555354358397,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 526.3157894736842,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 517.6555354358397,
+          "lineStartY": 255.0,
+          "lineEndX": 429.7128856167917,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "雍和宫to东直门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 526.3157894736842,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 534.9760435115286,
+          "lineStartY": 245.0,
+          "lineEndX": 622.9186933305766,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 631.578947368421,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 622.9186933305766,
+          "lineStartY": 255.0,
+          "lineEndX": 534.9760435115286,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "东直门to东四十条",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 631.578947368421,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 640.2392014062655,
+          "lineStartY": 245.0,
+          "lineEndX": 728.1818512253134,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 736.8421052631578,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 728.1818512253134,
+          "lineStartY": 255.0,
+          "lineEndX": 640.2392014062655,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "东四十条to朝阳门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 736.8421052631578,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 745.5023593010022,
+          "lineStartY": 245.0,
+          "lineEndX": 833.4450091200503,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 842.1052631578947,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 833.4450091200503,
+          "lineStartY": 255.0,
+          "lineEndX": 745.5023593010022,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "朝阳门to建国门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 842.1052631578947,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 850.7655171957391,
+          "lineStartY": 245.0,
+          "lineEndX": 938.7081670147871,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 947.3684210526316,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 938.7081670147871,
+          "lineStartY": 255.0,
+          "lineEndX": 850.7655171957391,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "建国门to北京站",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 947.3684210526316,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 956.028675090476,
+          "lineStartY": 245.0,
+          "lineEndX": 1043.971324909524,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1052.6315789473683,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1043.971324909524,
+          "lineStartY": 255.0,
+          "lineEndX": 956.028675090476,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "北京站to崇文门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1052.6315789473683,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1061.2918329852127,
+          "lineStartY": 245.0,
+          "lineEndX": 1149.2344828042608,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1157.8947368421052,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1149.2344828042608,
+          "lineStartY": 255.0,
+          "lineEndX": 1061.2918329852127,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "崇文门to前门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1157.8947368421052,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1166.5549908799496,
+          "lineStartY": 245.0,
+          "lineEndX": 1254.4976406989977,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1263.157894736842,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1254.4976406989977,
+          "lineStartY": 255.0,
+          "lineEndX": 1166.5549908799496,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "前门to和平门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1263.157894736842,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1271.8181487746865,
+          "lineStartY": 245.0,
+          "lineEndX": 1359.7607985937345,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1368.421052631579,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1359.7607985937345,
+          "lineStartY": 255.0,
+          "lineEndX": 1271.8181487746865,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "和平门to宣武门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1368.421052631579,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1377.0813066694234,
+          "lineStartY": 245.0,
+          "lineEndX": 1465.0239564884712,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1473.6842105263156,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1465.0239564884712,
+          "lineStartY": 255.0,
+          "lineEndX": 1377.0813066694234,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "宣武门to长椿街",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1473.6842105263156,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1482.34446456416,
+          "lineStartY": 245.0,
+          "lineEndX": 1570.287114383208,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1578.9473684210525,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1570.287114383208,
+          "lineStartY": 255.0,
+          "lineEndX": 1482.34446456416,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "长椿街to复兴门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1578.9473684210525,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1587.607622458897,
+          "lineStartY": 245.0,
+          "lineEndX": 1675.550272277945,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1684.2105263157894,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1675.550272277945,
+          "lineStartY": 255.0,
+          "lineEndX": 1587.607622458897,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "复兴门to车公庄",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1684.2105263157894,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1692.8707803536338,
+          "lineStartY": 245.0,
+          "lineEndX": 1780.8134301726818,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1789.4736842105262,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1780.8134301726818,
+          "lineStartY": 255.0,
+          "lineEndX": 1692.8707803536338,
+          "lineEndY": 255.0
+        }
+      ]
+    },
+    {
+      "name": "车公庄to阜成门",
+      "color": "#004b87",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1789.4736842105262,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.5235987755982989,
+          "arcEndAngle": -0.5235987755982989,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1798.1339382483707,
+          "lineStartY": 245.0,
+          "lineEndX": 1886.0765880674187,
+          "lineEndY": 245.0
+        },
+        {
+          "lineType": "arc",
+          "arcCenterX": 1894.7368421052631,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 3.6651914291880923,
+          "arcEndAngle": 2.617993877991494,
+          "isCounterClockWise": true
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1886.0765880674187,
+          "lineStartY": 255.0,
+          "lineEndX": 1798.1339382483707,
+          "lineEndY": 255.0
+        }
+      ]
+    }
+  ],
+  "stationTransfers": [
+    {
+      "name": null,
+      "color": "#008c95",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 105.26315789473684,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 1.5707963267948966,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 95.26315789473684,
+          "lineStartY": 250.0,
+          "lineEndX": 95.26315789473684,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 95.26315789473684,
+          "lineStartY": 283.0,
+          "lineEndX": 105.26315789473684,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 105.26315789473684,
+          "lineStartY": 293.0,
+          "lineEndX": 105.26315789473684,
+          "lineEndY": 260.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#f4da40",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 105.26315789473684,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 1.5707963267948966
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 105.26315789473684,
+          "lineStartY": 260.0,
+          "lineEndX": 105.26315789473684,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 105.26315789473684,
+          "lineStartY": 293.0,
+          "lineEndX": 115.26315789473684,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 115.26315789473684,
+          "lineStartY": 283.0,
+          "lineEndX": 115.26315789473684,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#d3a3c9",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 210.52631578947367,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 200.52631578947367,
+          "lineStartY": 250.0,
+          "lineEndX": 200.52631578947367,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 200.52631578947367,
+          "lineStartY": 283.0,
+          "lineEndX": 210.52631578947367,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 210.52631578947367,
+          "lineStartY": 293.0,
+          "lineEndX": 220.52631578947367,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 220.52631578947367,
+          "lineStartY": 283.0,
+          "lineEndX": 220.52631578947367,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#009b77",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 315.7894736842105,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 305.7894736842105,
+          "lineStartY": 250.0,
+          "lineEndX": 305.7894736842105,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 305.7894736842105,
+          "lineStartY": 283.0,
+          "lineEndX": 315.7894736842105,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 315.7894736842105,
+          "lineStartY": 293.0,
+          "lineEndX": 325.7894736842105,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 325.7894736842105,
+          "lineStartY": 283.0,
+          "lineEndX": 325.7894736842105,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#aa0061",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 526.3157894736842,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 516.3157894736842,
+          "lineStartY": 250.0,
+          "lineEndX": 516.3157894736842,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 516.3157894736842,
+          "lineStartY": 283.0,
+          "lineEndX": 526.3157894736842,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 526.3157894736842,
+          "lineStartY": 293.0,
+          "lineEndX": 536.3157894736842,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 536.3157894736842,
+          "lineStartY": 283.0,
+          "lineEndX": 536.3157894736842,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#f4da40",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 631.578947368421,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 1.5707963267948966,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 621.578947368421,
+          "lineStartY": 250.0,
+          "lineEndX": 621.578947368421,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 621.578947368421,
+          "lineStartY": 283.0,
+          "lineEndX": 631.578947368421,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 631.578947368421,
+          "lineStartY": 293.0,
+          "lineEndX": 631.578947368421,
+          "lineEndY": 260.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#a192b2",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 631.578947368421,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 1.5707963267948966
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 631.578947368421,
+          "lineStartY": 260.0,
+          "lineEndX": 631.578947368421,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 631.578947368421,
+          "lineStartY": 293.0,
+          "lineEndX": 641.578947368421,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 641.578947368421,
+          "lineStartY": 283.0,
+          "lineEndX": 641.578947368421,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#b58500",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 842.1052631578947,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 832.1052631578947,
+          "lineStartY": 250.0,
+          "lineEndX": 832.1052631578947,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 832.1052631578947,
+          "lineStartY": 283.0,
+          "lineEndX": 842.1052631578947,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 842.1052631578947,
+          "lineStartY": 293.0,
+          "lineEndX": 852.1052631578947,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 852.1052631578947,
+          "lineStartY": 283.0,
+          "lineEndX": 852.1052631578947,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#a4343a",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 947.3684210526316,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 937.3684210526316,
+          "lineStartY": 250.0,
+          "lineEndX": 937.3684210526316,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 937.3684210526316,
+          "lineStartY": 283.0,
+          "lineEndX": 947.3684210526316,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 947.3684210526316,
+          "lineStartY": 293.0,
+          "lineEndX": 957.3684210526316,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 957.3684210526316,
+          "lineStartY": 283.0,
+          "lineEndX": 957.3684210526316,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#aa0061",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1157.8947368421052,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1147.8947368421052,
+          "lineStartY": 250.0,
+          "lineEndX": 1147.8947368421052,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1147.8947368421052,
+          "lineStartY": 283.0,
+          "lineEndX": 1157.8947368421052,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1157.8947368421052,
+          "lineStartY": 293.0,
+          "lineEndX": 1167.8947368421052,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1167.8947368421052,
+          "lineStartY": 283.0,
+          "lineEndX": 1167.8947368421052,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#009b77",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1263.157894736842,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1253.157894736842,
+          "lineStartY": 250.0,
+          "lineEndX": 1253.157894736842,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1253.157894736842,
+          "lineStartY": 283.0,
+          "lineEndX": 1263.157894736842,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1263.157894736842,
+          "lineStartY": 293.0,
+          "lineEndX": 1273.157894736842,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1273.157894736842,
+          "lineStartY": 283.0,
+          "lineEndX": 1273.157894736842,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#008c95",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1473.6842105263156,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1463.6842105263156,
+          "lineStartY": 250.0,
+          "lineEndX": 1463.6842105263156,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1463.6842105263156,
+          "lineStartY": 283.0,
+          "lineEndX": 1473.6842105263156,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1473.6842105263156,
+          "lineStartY": 293.0,
+          "lineEndX": 1483.6842105263156,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1483.6842105263156,
+          "lineStartY": 283.0,
+          "lineEndX": 1483.6842105263156,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#a4343a",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1684.2105263157894,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1674.2105263157894,
+          "lineStartY": 250.0,
+          "lineEndX": 1674.2105263157894,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1674.2105263157894,
+          "lineStartY": 283.0,
+          "lineEndX": 1684.2105263157894,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1684.2105263157894,
+          "lineStartY": 293.0,
+          "lineEndX": 1694.2105263157894,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1694.2105263157894,
+          "lineStartY": 283.0,
+          "lineEndX": 1694.2105263157894,
+          "lineEndY": 250.0
+        }
+      ]
+    },
+    {
+      "name": null,
+      "color": "#b58500",
+      "lines": [
+        {
+          "lineType": "arc",
+          "arcCenterX": 1789.4736842105262,
+          "arcCenterY": 250.0,
+          "radius": 10.0,
+          "arcStartAngle": 0.0,
+          "arcEndAngle": 3.141592653589793
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1779.4736842105262,
+          "lineStartY": 250.0,
+          "lineEndX": 1779.4736842105262,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1779.4736842105262,
+          "lineStartY": 283.0,
+          "lineEndX": 1789.4736842105262,
+          "lineEndY": 293.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1789.4736842105262,
+          "lineStartY": 293.0,
+          "lineEndX": 1799.4736842105262,
+          "lineEndY": 283.0
+        },
+        {
+          "lineType": "line",
+          "lineStartX": 1799.4736842105262,
+          "lineStartY": 283.0,
+          "lineEndX": 1799.4736842105262,
+          "lineEndY": 250.0
+        }
+      ]
+    }
+  ],
+  "transferTexts": [
+    { "text": "4号线大兴线", "xpos": 105.26315789473684, "ypos": 308.0 },
+    { "text": "13号线", "xpos": 105.26315789473684, "ypos": 323.0 },
+    { "text": "19号线", "xpos": 210.52631578947367, "ypos": 308.0 },
+    { "text": "8号线", "xpos": 315.7894736842105, "ypos": 308.0 },
+    { "text": "5号线", "xpos": 526.3157894736842, "ypos": 308.0 },
+    { "text": "13号线", "xpos": 631.578947368421, "ypos": 308.0 },
+    { "text": "首都机场线", "xpos": 631.578947368421, "ypos": 323.0 },
+    { "text": "6号线", "xpos": 842.1052631578947, "ypos": 308.0 },
+    { "text": "1号线八通线", "xpos": 947.3684210526316, "ypos": 308.0 },
+    { "text": "5号线", "xpos": 1157.8947368421052, "ypos": 308.0 },
+    { "text": "8号线", "xpos": 1263.157894736842, "ypos": 308.0 },
+    { "text": "4号线大兴线", "xpos": 1473.6842105263156, "ypos": 308.0 },
+    { "text": "1号线八通线", "xpos": 1684.2105263157894, "ypos": 308.0 },
+    { "text": "6号线", "xpos": 1789.4736842105262, "ypos": 308.0 }
+  ]
+}
