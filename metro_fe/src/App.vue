@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <MetroSelector :metroInfos="metroInfos" />
-    <MetroCanvas :metroInfos="metroInfos" />
+    <MetroSelector
+      :cityAndLines="cityAndLines"
+      @setCityAndLineId="setCityAndLineId"
+   
+    />
+    <MetroCanvas :singleLineData="singleLineData" />
   </div>
 </template>
 
@@ -19,15 +23,47 @@ export default {
 
   data() {
     return {
-      metroInfos: [],
+      cityAndLines: [],
+      singleLineData: {
+        stations: [],
+        stationConnections: [],
+        stationTransfers: [],
+        transferTexts: [],
+      },
+      cityId: 1, //当前选中的城市和线路
+      lineId: 1,
     };
   },
 
-  created() {
+  methods: {
+    setCityAndLineId(cityId, lineId) {
+      this.cityId = cityId;
+      this.lineId = lineId;
+      console.log(`new cityId ${cityId} lineId ${lineId}`);
+      this.refreshSingleLineData();
+    },
+
+    refreshSingleLineData() {
+      axios
+        .post("http://localhost:8080/singleLineMetroInfo", {
+          cityId: this.cityId,
+          lineId: this.lineId,
+        })
+        .then((response) => {
+          this.singleLineData = response.data;
+        })
+        .catch(function (error) {
+          // 请求失败处理
+          console.log(error);
+        });
+    },
+  },
+
+  mounted() {
     axios
       .get("http://localhost:8080/allCityMetroInfo")
       .then((response) => {
-        this.metroInfos = response.data.metroInfos;
+        this.cityAndLines = response.data.metroInfos;
       })
       .catch(function (error) {
         // 请求失败处理

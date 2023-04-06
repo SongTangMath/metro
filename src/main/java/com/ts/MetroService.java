@@ -129,28 +129,46 @@ public class MetroService {
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(7)
                 .lineName("7号线")
-                .stationNames(Arrays.asList())
+                .stationNames(
+                    Arrays.asList(
+                        "北京西站", "湾子", "达官营", "广安门内", "菜市口", "虎坊桥", "珠市口", "桥湾", "磁器口", "广渠门内",
+                        "广渠门外", "双井", "九龙山", "大郊亭", "百子湾", "化工", "南楼梓庄", "欢乐谷景区", "垡头", "双合", "焦化厂",
+                        "黄厂", "郎辛庄", "黑庄户", "万盛西", "万盛东", "群芳", "高楼金", "花庄", "环球度假区"))
                 .color("#ffc56e")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(8)
                 .lineName("8号线")
-                .stationNames(Arrays.asList())
+                .stationNames(
+                    Arrays.asList(
+                        "朱辛庄", "育知路", "平西府", "回龙观东大街", "霍营", "育新", "西小口", "永泰庄", "林萃桥", "森林公园南门",
+                        "奥林匹克公园", "奥体中心", "北土城", "安华桥", "安德里北街", "鼓楼大街", "什刹海", "南锣鼓巷", "中国美术馆",
+                        "金鱼胡同", "王府井", "前门", "珠市口", "天桥", "永定门外", "木樨园", "海户屯", "大红门南", "和义", "东高地",
+                        "火箭万源", "五福堂", "德茂", "瀛海"))
                 .color("#009b77")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(9)
                 .lineName("9号线")
-                .stationNames(Arrays.asList())
+                .stationNames(
+                    Arrays.asList(
+                        "国家图书馆", "白石桥南", "白堆子", "军事博物馆", "北京西站", "六里桥东", "六里桥", "七里庄", "丰台东大街",
+                        "凤台南路", "科怡路", "丰台科技园", "郭公庄"))
                 .color("#97d700")
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
                 .lineId(10)
                 .lineName("10号线")
-                .stationNames(Arrays.asList())
+                .stationNames(
+                    Arrays.asList(
+                        "巴沟", "火器营", "长春桥", "车道沟", "慈寿寺", "西钓鱼台", "公主坟", "莲花桥", "六里桥", "西局", "泥洼",
+                        "丰台站", "首经贸", "纪家庙", "草桥", "角门西", "角门东", "大红门", "石榴庄", "宋家庄", "成寿寺", "分钟寺",
+                        "十里河", "潘家园", "劲松", "双井", "国贸", "金台夕照", "呼家楼", "团结湖", "农业展览馆", "亮马桥", "三元桥",
+                        "太阳宫", "芍药居", "惠新西街南口", "安贞门", "北土城", "健德门", "牡丹园", "西土城", "知春路", "知春里",
+                        "海淀黄庄", "苏州街"))
                 .color("#0092bc")
                 .isLoopLine(true)
                 .build(),
@@ -273,7 +291,7 @@ public class MetroService {
             MetroStation.builder().stationName("西单").lineIds(Arrays.asList(1, 4)).build(),
             MetroStation.builder().stationName("天安门西").lineIds(Arrays.asList(1)).build(),
             MetroStation.builder().stationName("天安门东").lineIds(Arrays.asList(1)).build(),
-            MetroStation.builder().stationName("王府井").lineIds(Arrays.asList(1)).build(),
+            MetroStation.builder().stationName("王府井").lineIds(Arrays.asList(1, 8)).build(),
             MetroStation.builder().stationName("东单").lineIds(Arrays.asList(1, 5)).build(),
             MetroStation.builder().stationName("建国门").lineIds(Arrays.asList(1, 2)).build(),
             MetroStation.builder().stationName("永安里").lineIds(Arrays.asList(1)).build(),
@@ -419,31 +437,175 @@ public class MetroService {
             MetroStation.builder().stationName("东夏园").lineIds(Arrays.asList(6)).build(),
             MetroStation.builder().stationName("潞城").lineIds(Arrays.asList(6)).build());
 
+    List<MetroStation> line7Stations =
+        Arrays.asList(
+            MetroStation.builder().stationName("北京西站").lineIds(Arrays.asList(7, 9)).build(),
+            MetroStation.builder().stationName("湾子").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("达官营").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("广安门内").lineIds(Arrays.asList(7)).build(),
+
+            //  MetroStation.builder().stationName("菜市口").lineIds(Arrays.asList(4,7)).build(),
+            MetroStation.builder().stationName("虎坊桥").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("珠市口").lineIds(Arrays.asList(7, 8)).build(),
+            MetroStation.builder().stationName("桥湾").lineIds(Arrays.asList(7)).build(),
+            // MetroStation.builder().stationName("磁器口").lineIds(Arrays.asList(5,7)).build(),
+            MetroStation.builder().stationName("广渠门内").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("广渠门外").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("双井").lineIds(Arrays.asList(7, 10)).build(),
+            MetroStation.builder().stationName("九龙山").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("大郊亭").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("百子湾").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("化工").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("南楼梓庄").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("欢乐谷景区").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("垡头").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("双合").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("焦化厂").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("黄厂").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("郎辛庄").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("黑庄户").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("万盛西").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("万盛东").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("群芳").lineIds(Arrays.asList(7)).build(),
+            MetroStation.builder().stationName("高楼金").lineIds(Arrays.asList(7)).build()
+            //  ,MetroStation.builder().stationName("花庄").lineIds(Arrays.asList(1,7)).build(),
+            //  MetroStation.builder().stationName("环球度假区").lineIds(Arrays.asList(1,7)).build()
+            );
+
+    List<MetroStation> line8Stations =
+        Arrays.asList(
+            MetroStation.builder().stationName("朱辛庄").lineIds(Arrays.asList(8, 27)).build(),
+            MetroStation.builder().stationName("育知路").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("平西府").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("回龙观东大街").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("霍营").lineIds(Arrays.asList(8, 13)).build(),
+            MetroStation.builder().stationName("育新").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("西小口").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("永泰庄").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("林萃桥").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("森林公园南门").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("奥林匹克公园").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("奥体中心").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("北土城").lineIds(Arrays.asList(8, 10)).build(),
+            MetroStation.builder().stationName("安华桥").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("安德里北街").lineIds(Arrays.asList(8)).build(),
+
+            //    MetroStation.builder().stationName("鼓楼大街").lineIds(Arrays.asList(2,8)).build(),
+            MetroStation.builder().stationName("什刹海").lineIds(Arrays.asList(8)).build(),
+            //   MetroStation.builder().stationName("南锣鼓巷").lineIds(Arrays.asList(6,8)).build(),
+            MetroStation.builder().stationName("中国美术馆").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("金鱼胡同").lineIds(Arrays.asList(8)).build(),
+            //   MetroStation.builder().stationName("王府井").lineIds(Arrays.asList(1,8)).build(),
+            //  MetroStation.builder().stationName("前门").lineIds(Arrays.asList(2,8)).build(),
+            //  MetroStation.builder().stationName("珠市口").lineIds(Arrays.asList(7,8)).build(),
+            MetroStation.builder().stationName("天桥").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("永定门外").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("木樨园").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("海户屯").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("大红门南").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("和义").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("东高地").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("火箭万源").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("五福堂").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("德茂").lineIds(Arrays.asList(8)).build(),
+            MetroStation.builder().stationName("瀛海").lineIds(Arrays.asList(8)).build());
+
+    List<MetroStation> line9Stations =
+        Arrays.asList(
+            // MetroStation.builder().stationName("国家图书馆").lineIds(Arrays.asList(4,9,16)).build(),
+            //   MetroStation.builder().stationName("白石桥南").lineIds(Arrays.asList(6,9)).build(),
+            MetroStation.builder().stationName("白堆子").lineIds(Arrays.asList(9)).build(),
+            //   MetroStation.builder().stationName("军事博物馆").lineIds(Arrays.asList(1,9)).build(),
+
+            //   MetroStation.builder().stationName("北京西站").lineIds(Arrays.asList(7,9)).build(),
+            MetroStation.builder().stationName("六里桥东").lineIds(Arrays.asList(9)).build(),
+            MetroStation.builder().stationName("六里桥").lineIds(Arrays.asList(9, 10)).build(),
+            MetroStation.builder().stationName("七里庄").lineIds(Arrays.asList(9)).build(),
+            MetroStation.builder().stationName("丰台东大街").lineIds(Arrays.asList(9)).build(),
+            MetroStation.builder().stationName("凤台南路").lineIds(Arrays.asList(9)).build(),
+            MetroStation.builder().stationName("科怡路").lineIds(Arrays.asList(9)).build(),
+            MetroStation.builder().stationName("丰台科技园").lineIds(Arrays.asList(9)).build(),
+            MetroStation.builder().stationName("郭公庄").lineIds(Arrays.asList(9, 25)).build());
+
+    List<MetroStation> line10Stations =
+        Arrays.asList(
+            MetroStation.builder().stationName("巴沟").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("火器营").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("长春桥").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("车道沟").lineIds(Arrays.asList(10)).build(),
+            //   MetroStation.builder().stationName("慈寿寺").lineIds(Arrays.asList(6,10)).build(),
+            MetroStation.builder().stationName("西钓鱼台").lineIds(Arrays.asList(10)).build(),
+
+            //   MetroStation.builder().stationName("公主坟").lineIds(Arrays.asList(1,10)).build(),
+            MetroStation.builder().stationName("莲花桥").lineIds(Arrays.asList(10)).build(),
+            //   MetroStation.builder().stationName("六里桥").lineIds(Arrays.asList(9,10)).build(),
+
+            MetroStation.builder().stationName("西局").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("泥洼").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("丰台站").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("首经贸").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("纪家庙").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("草桥").lineIds(Arrays.asList(10)).build(),
+
+            //  MetroStation.builder().stationName("角门西").lineIds(Arrays.asList(4,10)).build(),
+            MetroStation.builder().stationName("角门东").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("大红门").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("石榴庄").lineIds(Arrays.asList(10)).build(),
+            //  MetroStation.builder().stationName("宋家庄").lineIds(Arrays.asList(5,10,26)).build(),
+            MetroStation.builder().stationName("成寿寺").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("分钟寺").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("十里河").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("潘家园").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("劲松").lineIds(Arrays.asList(10)).build(),
+            //    MetroStation.builder().stationName("双井").lineIds(Arrays.asList(7,10)).build(),
+            //      MetroStation.builder().stationName("国贸").lineIds(Arrays.asList(1,10)).build(),
+
+            MetroStation.builder().stationName("金台夕照").lineIds(Arrays.asList(10)).build(),
+            //    MetroStation.builder().stationName("呼家楼").lineIds(Arrays.asList(6,10)).build(),
+            MetroStation.builder().stationName("团结湖").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("农业展览馆").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("亮马桥").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("三元桥").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("太阳宫").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("芍药居").lineIds(Arrays.asList(10, 13)).build(),
+            //    MetroStation.builder().stationName("惠新西街南口").lineIds(Arrays.asList(5,10)).build(),
+
+            MetroStation.builder().stationName("安贞门").lineIds(Arrays.asList(10)).build(),
+            //   MetroStation.builder().stationName("北土城").lineIds(Arrays.asList(8,10)).build(),
+            MetroStation.builder().stationName("健德门").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("牡丹园").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("西土城").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("知春路").lineIds(Arrays.asList(10, 13)).build(),
+            MetroStation.builder().stationName("知春里").lineIds(Arrays.asList(10)).build(),
+            //   MetroStation.builder().stationName("海淀黄庄").lineIds(Arrays.asList(4,10)).build(),
+            MetroStation.builder().stationName("苏州街").lineIds(Arrays.asList(10)).build());
+
+    System.out.println(
+        line10Stations
+            .stream()
+            .map(o -> String.format("\"%s\"", o.getStationName()))
+            .collect(Collectors.joining(",")));
+
     List<MetroStation> line13Stations =
         Arrays.asList(
             // MetroStation.builder().stationName("西直门").lineIds(Arrays.asList(2, 4, 13)).build(),
             MetroStation.builder().stationName("大钟寺").lineIds(Arrays.asList(13)).build(),
-            MetroStation.builder().stationName("知春路").lineIds(Arrays.asList(10, 13)).build(),
+            //    MetroStation.builder().stationName("知春路").lineIds(Arrays.asList(10, 13)).build(),
             MetroStation.builder().stationName("五道口").lineIds(Arrays.asList(13)).build(),
             MetroStation.builder().stationName("上地").lineIds(Arrays.asList(13)).build(),
             MetroStation.builder().stationName("清河站").lineIds(Arrays.asList(13, 27)).build(),
             MetroStation.builder().stationName("西二旗").lineIds(Arrays.asList(13, 27)).build(),
             MetroStation.builder().stationName("龙泽").lineIds(Arrays.asList(13)).build(),
             MetroStation.builder().stationName("回龙观").lineIds(Arrays.asList(13)).build(),
-            MetroStation.builder().stationName("霍营").lineIds(Arrays.asList(8, 13)).build(),
+            //  MetroStation.builder().stationName("霍营").lineIds(Arrays.asList(8, 13)).build(),
             // MetroStation.builder().stationName("立水桥").lineIds(Arrays.asList(5, 13)).build(),
             MetroStation.builder().stationName("北苑").lineIds(Arrays.asList(13)).build(),
             MetroStation.builder().stationName("望京西").lineIds(Arrays.asList(13, 15)).build(),
-            MetroStation.builder().stationName("芍药居").lineIds(Arrays.asList(10, 13)).build(),
+            //  MetroStation.builder().stationName("芍药居").lineIds(Arrays.asList(10, 13)).build(),
             MetroStation.builder().stationName("光熙门").lineIds(Arrays.asList(13)).build(),
             MetroStation.builder().stationName("柳芳").lineIds(Arrays.asList(13)).build()
             // ,MetroStation.builder().stationName("东直门").lineIds(Arrays.asList(2, 13)).build()
             );
-    System.out.println(
-        line13Stations
-            .stream()
-            .map(o -> String.format("\"%s\"", o.getStationName()))
-            .collect(Collectors.joining(",")));
 
     List<MetroStation> stations =
         Stream.of(
@@ -452,6 +614,10 @@ public class MetroService {
                 line4Stations,
                 line5Stations,
                 line6Stations,
+                line7Stations,
+                line8Stations,
+                line9Stations,
+                line10Stations,
                 line13Stations)
             .flatMap(Collection::stream)
             .collect(Collectors.toList());
@@ -492,7 +658,7 @@ public class MetroService {
                 .stationNames(
                     Arrays.asList(
                         "广州南站", "石壁", "会江", "南浦", "洛溪", "南洲", "东晓南", "江泰路", "昌岗", "江南西", "市二宫",
-                        "海珠广场", "西门口", "纪念堂", "越秀公园", "广州火车站", "三元里", "飞翔公园", "白云公园", "白云文化广场",
+                        "海珠广场", "公园前", "纪念堂", "越秀公园", "广州火车站", "三元里", "飞翔公园", "白云公园", "白云文化广场",
                         "萧岗", "江夏", "黄边", "嘉禾望岗"))
                 .color("#00629b")
                 .build(),
@@ -519,7 +685,10 @@ public class MetroService {
                 .cityId(CityEnum.GUANGZHOU.getId())
                 .lineId(4)
                 .lineName("4号线")
-                .stationNames(Arrays.asList())
+                .stationNames(
+                    Arrays.asList(
+                        "南沙客运港", "南横", "塘坑", "大涌", "广隆", "飞沙角", "金洲", "蕉门", "黄阁", "黄阁汽车城", "庆盛",
+                        "东涌", "低涌", "海傍", "石碁", "官桥", "新造", "大学城南", "官洲", "万胜围", "车陂南", "车陂", "黄村"))
                 .color("#00843d")
                 .build(),
             MetroLine.builder()
@@ -706,14 +875,40 @@ public class MetroService {
             MetroStation.builder().stationName("机场南").lineIds(Arrays.asList(3)).build(),
             MetroStation.builder().stationName("机场北").lineIds(Arrays.asList(3)).build());
 
+    List<MetroStation> line4Stations =
+        Arrays.asList(
+            MetroStation.builder().stationName("南沙客运港").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("南横").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("塘坑").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("大涌").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("广隆").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("飞沙角").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("金洲").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("蕉门").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("黄阁").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("黄阁汽车城").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("庆盛").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("东涌").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("低涌").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("海傍").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("石碁").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("官桥").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("新造").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("大学城南").lineIds(Arrays.asList(4, 7)).build(),
+            MetroStation.builder().stationName("官洲").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("万胜围").lineIds(Arrays.asList(4, 8)).build(),
+            MetroStation.builder().stationName("车陂南").lineIds(Arrays.asList(4, 5)).build(),
+            MetroStation.builder().stationName("车陂").lineIds(Arrays.asList(4)).build(),
+            MetroStation.builder().stationName("黄村").lineIds(Arrays.asList(4, 21)).build());
+
     System.out.println(
-        line3Stations
+        line4Stations
             .stream()
             .map(o -> String.format("\"%s\"", o.getStationName()))
             .collect(Collectors.joining(",")));
 
     List<MetroStation> stations =
-        Stream.of(line1Stations, line2Stations, line3Stations)
+        Stream.of(line1Stations, line2Stations, line3Stations, line4Stations)
             .flatMap(Collection::stream)
             .collect(Collectors.toList());
 
@@ -728,7 +923,7 @@ public class MetroService {
   }
 
   public SingleLineMetroInfo singleLineMetroInfo(MetroInfoRequest request) {
-    MetroInfo allCityMetroInfo = null;
+    MetroInfo allCityMetroInfo = new MetroInfo();
     switch (CityEnum.fromId(request.getCityId())) {
       case BEIJING:
         allCityMetroInfo = beijingMetroInfo();
@@ -737,7 +932,7 @@ public class MetroService {
         allCityMetroInfo = guangzhouMetroInfo();
         break;
       default:
-        return null;
+        break;
     }
     MetroLine line =
         allCityMetroInfo
@@ -756,6 +951,7 @@ public class MetroService {
 
     List<MetroStation> mainLineStations =
         line.getStationNames().stream().map(stationNameToStation::get).collect(Collectors.toList());
+
     List<MetroStation> allStations = new ArrayList<>(mainLineStations);
     Map<Integer, MetroLine> lineIdToLine =
         allCityMetroInfo

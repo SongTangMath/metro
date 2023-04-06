@@ -15,7 +15,7 @@ import { Cascader } from "element-ui";
 export default {
   name: "MetroSelector",
   props: {
-    metroInfos: Array,
+    cityAndLines: Array,
   },
   components: {
     Cascader,
@@ -24,16 +24,16 @@ export default {
   data() {
     return {
       value: [],
-      cityId: 1,
-      lineId: 1,
+      cityId: 0,
+      lineId: 0,
     };
   },
 
   computed: {
     options() {
-      let cityAndLines = [];
+      let cityAndLineOptions = [];
 
-      for (let city of this.metroInfos) {
+      for (let city of this.cityAndLines) {
         let option = {};
 
         option.label = city.cityName;
@@ -46,16 +46,18 @@ export default {
             value: line.lineId,
           });
         }
-        cityAndLines.push(option);
+        cityAndLineOptions.push(option);
       }
 
-      return cityAndLines;
+      return cityAndLineOptions;
     },
   },
 
   methods: {
     handleChange(value) {
-      console.log(value);
+      this.cityId = value[0];
+      this.lineId = value[1];
+      this.$emit("setCityAndLineId", this.cityId, this.lineId);
     },
   },
   mounted() {},

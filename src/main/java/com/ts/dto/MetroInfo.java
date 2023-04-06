@@ -3,6 +3,7 @@ package com.ts.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.ts.constants.MetroStationLineTypeEnum;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,8 +21,8 @@ public class MetroInfo {
   // 当前城市站点数
   private Integer stationCount;
 
-  private List<MetroLine> lines;
-  private List<MetroStation> stations;
+  private List<MetroLine> lines = new ArrayList<>();
+  private List<MetroStation> stations = new ArrayList<>();
 
   public void calculateStationCount() {
     this.stationCount = stations.size();

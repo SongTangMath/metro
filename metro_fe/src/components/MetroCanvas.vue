@@ -5,25 +5,23 @@
 </template>
 
 <script>
-import guangzhou_3 from "/static/guangzhou_3.json";
-
 export default {
   name: "MetroCanvas",
-  props: {},
+  props: { singleLineData: Object },
   components: {},
 
   data() {
     return {
-      metroData: guangzhou_3,
+      turnImg: {},
     };
   },
 
   methods: {
-    draw(turnImg) {
+    draw() {
       let canvas = document.getElementById("metro-canvas");
       let ctx = canvas.getContext("2d");
 
-      let stations = this.metroData.stations;
+      let stations = this.singleLineData.stations;
       let stationRadius = 10;
 
       //计算坐标.x轴分成(站点数+1)份.
@@ -34,7 +32,7 @@ export default {
         if (stations[i].transferLines) {
           //绘制换乘站图片
           ctx.drawImage(
-            turnImg,
+            this.turnImg,
             stations[i].xpos - stationRadius,
             stations[i].ypos - stationRadius,
             2 * stationRadius,
@@ -67,8 +65,8 @@ export default {
         ctx.restore();
       }
       let allConnections = [
-        ...this.metroData.stationConnections,
-        ...this.metroData.stationTransfers,
+        ...this.singleLineData.stationConnections,
+        ...this.singleLineData.stationTransfers,
       ];
       for (let connectionLine of allConnections) {
         ctx.beginPath();
@@ -92,7 +90,7 @@ export default {
         ctx.closePath();
       }
 
-      for (let transferText of this.metroData.transferTexts) {
+      for (let transferText of this.singleLineData.transferTexts) {
         ctx.save();
         ctx.translate(transferText.xpos, transferText.ypos);
         // ctx.rotate(-Math.PI / 4);
@@ -106,14 +104,20 @@ export default {
   },
 
   mounted() {
-    let turnImg = new Image();
-    let currentComponent = this;
+    this.turnImg = new Image();
     // https://map.bjsubway.com/subwaymap/turn.png
-    turnImg.src = require("@/assets/turnImg.png");
+    this.turnImg.src = require("@/assets/turnImg.png");
+  },
 
-    turnImg.onload = function () {
-      currentComponent.draw(turnImg);
-    };
+  watch: {
+    singleLineData() {
+      console.log("singleLineData changed");
+      //清空画布
+      let canvas = document.getElementById("metro-canvas");
+      let ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      this.draw();
+    },
   },
 };
 </script>
