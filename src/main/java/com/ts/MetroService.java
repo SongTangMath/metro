@@ -6,6 +6,7 @@ import com.ts.constants.MetroStationLineTypeEnum;
 import com.ts.dto.CityWithMetroResponse;
 import com.ts.dto.MetroInfo;
 import com.ts.dto.MetroInfo.MetroBranchLine;
+import com.ts.dto.MetroInfo.MetroGraphText;
 import com.ts.dto.MetroInfo.MetroLine;
 import com.ts.dto.MetroInfo.MetroStation;
 import com.ts.dto.MetroInfo.MetroStationConnection;
@@ -164,13 +165,27 @@ public class MetroService {
                 .lineName("10号线")
                 .stationNames(
                     Arrays.asList(
-                        "巴沟", "火器营", "长春桥", "车道沟", "慈寿寺", "西钓鱼台", "公主坟", "莲花桥", "六里桥", "西局", "泥洼",
-                        "丰台站", "首经贸", "纪家庙", "草桥", "角门西", "角门东", "大红门", "石榴庄", "宋家庄", "成寿寺", "分钟寺",
-                        "十里河", "潘家园", "劲松", "双井", "国贸", "金台夕照", "呼家楼", "团结湖", "农业展览馆", "亮马桥", "三元桥",
-                        "太阳宫", "芍药居", "惠新西街南口", "安贞门", "北土城", "健德门", "牡丹园", "西土城", "知春路", "知春里",
-                        "海淀黄庄", "苏州街"))
+                        "苏州街", "海淀黄庄", "知春里", "知春路", "西土城", "牡丹园", "健德门", "北土城", "安贞门", "惠新西街南口",
+                        "芍药居", "太阳宫", "三元桥", "亮马桥", "农业展览馆", "团结湖", "呼家楼", "金台夕照", "国贸", "双井", "劲松",
+                        "潘家园", "十里河", "分钟寺", "成寿寺", "宋家庄", "石榴庄", "大红门", "角门东", "角门西", "草桥", "纪家庙",
+                        "首经贸", "丰台站", "泥洼", "西局", "六里桥", "莲花桥", "公主坟", "西钓鱼台", "慈寿寺", "车道沟", "长春桥",
+                        "火器营", "巴沟"))
                 .color("#0092bc")
                 .isLoopLine(true)
+                .topStationNames(
+                    Arrays.asList(
+                        "苏州街", "海淀黄庄", "知春里", "知春路", "西土城", "牡丹园", "健德门", "北土城", "安贞门", "惠新西街南口",
+                        "芍药居", "太阳宫"))
+                .rightStationNames(
+                    Arrays.asList(
+                        "三元桥", "亮马桥", "农业展览馆", "团结湖", "呼家楼", "金台夕照", "国贸", "双井", "劲松", "潘家园", "十里河",
+                        "分钟寺"))
+                .bottomStationNames(
+                    Arrays.asList("成寿寺", "宋家庄", "石榴庄", "大红门", "角门东", "角门西", "草桥", "纪家庙", "首经贸"))
+                .leftStationNames(
+                    Arrays.asList(
+                        "丰台站", "泥洼", "西局", "六里桥", "莲花桥", "公主坟", "西钓鱼台", "慈寿寺", "车道沟", "长春桥", "火器营",
+                        "巴沟"))
                 .build(),
             MetroLine.builder()
                 .cityId(CityEnum.BEIJING.getId())
@@ -489,15 +504,14 @@ public class MetroService {
             MetroStation.builder().stationName("北土城").lineIds(Arrays.asList(8, 10)).build(),
             MetroStation.builder().stationName("安华桥").lineIds(Arrays.asList(8)).build(),
             MetroStation.builder().stationName("安德里北街").lineIds(Arrays.asList(8)).build(),
-
-            //    MetroStation.builder().stationName("鼓楼大街").lineIds(Arrays.asList(2,8)).build(),
+            // MetroStation.builder().stationName("鼓楼大街").lineIds(Arrays.asList(2,8)).build(),
             MetroStation.builder().stationName("什刹海").lineIds(Arrays.asList(8)).build(),
-            //   MetroStation.builder().stationName("南锣鼓巷").lineIds(Arrays.asList(6,8)).build(),
+            // MetroStation.builder().stationName("南锣鼓巷").lineIds(Arrays.asList(6,8)).build(),
             MetroStation.builder().stationName("中国美术馆").lineIds(Arrays.asList(8)).build(),
             MetroStation.builder().stationName("金鱼胡同").lineIds(Arrays.asList(8)).build(),
-            //   MetroStation.builder().stationName("王府井").lineIds(Arrays.asList(1,8)).build(),
-            //  MetroStation.builder().stationName("前门").lineIds(Arrays.asList(2,8)).build(),
-            //  MetroStation.builder().stationName("珠市口").lineIds(Arrays.asList(7,8)).build(),
+            // MetroStation.builder().stationName("王府井").lineIds(Arrays.asList(1,8)).build(),
+            // MetroStation.builder().stationName("前门").lineIds(Arrays.asList(2,8)).build(),
+            // MetroStation.builder().stationName("珠市口").lineIds(Arrays.asList(7,8)).build(),
             MetroStation.builder().stationName("天桥").lineIds(Arrays.asList(8)).build(),
             MetroStation.builder().stationName("永定门外").lineIds(Arrays.asList(8)).build(),
             MetroStation.builder().stationName("木樨园").lineIds(Arrays.asList(8)).build(),
@@ -513,11 +527,10 @@ public class MetroService {
     List<MetroStation> line9Stations =
         Arrays.asList(
             // MetroStation.builder().stationName("国家图书馆").lineIds(Arrays.asList(4,9,16)).build(),
-            //   MetroStation.builder().stationName("白石桥南").lineIds(Arrays.asList(6,9)).build(),
+            // MetroStation.builder().stationName("白石桥南").lineIds(Arrays.asList(6,9)).build(),
             MetroStation.builder().stationName("白堆子").lineIds(Arrays.asList(9)).build(),
-            //   MetroStation.builder().stationName("军事博物馆").lineIds(Arrays.asList(1,9)).build(),
-
-            //   MetroStation.builder().stationName("北京西站").lineIds(Arrays.asList(7,9)).build(),
+            // MetroStation.builder().stationName("军事博物馆").lineIds(Arrays.asList(1,9)).build(),
+            // MetroStation.builder().stationName("北京西站").lineIds(Arrays.asList(7,9)).build(),
             MetroStation.builder().stationName("六里桥东").lineIds(Arrays.asList(9)).build(),
             MetroStation.builder().stationName("六里桥").lineIds(Arrays.asList(9, 10)).build(),
             MetroStation.builder().stationName("七里庄").lineIds(Arrays.asList(9)).build(),
@@ -530,55 +543,51 @@ public class MetroService {
     List<MetroStation> line10Stations =
         Arrays.asList(
             MetroStation.builder().stationName("巴沟").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("火器营").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("长春桥").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("车道沟").lineIds(Arrays.asList(10)).build(),
-            //   MetroStation.builder().stationName("慈寿寺").lineIds(Arrays.asList(6,10)).build(),
-            MetroStation.builder().stationName("西钓鱼台").lineIds(Arrays.asList(10)).build(),
-
-            //   MetroStation.builder().stationName("公主坟").lineIds(Arrays.asList(1,10)).build(),
-            MetroStation.builder().stationName("莲花桥").lineIds(Arrays.asList(10)).build(),
-            //   MetroStation.builder().stationName("六里桥").lineIds(Arrays.asList(9,10)).build(),
-
-            MetroStation.builder().stationName("西局").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("泥洼").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("丰台站").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("首经贸").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("纪家庙").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("草桥").lineIds(Arrays.asList(10)).build(),
-
-            //  MetroStation.builder().stationName("角门西").lineIds(Arrays.asList(4,10)).build(),
-            MetroStation.builder().stationName("角门东").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("大红门").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("石榴庄").lineIds(Arrays.asList(10)).build(),
-            //  MetroStation.builder().stationName("宋家庄").lineIds(Arrays.asList(5,10,26)).build(),
-            MetroStation.builder().stationName("成寿寺").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("分钟寺").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("十里河").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("潘家园").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("劲松").lineIds(Arrays.asList(10)).build(),
-            //    MetroStation.builder().stationName("双井").lineIds(Arrays.asList(7,10)).build(),
-            //      MetroStation.builder().stationName("国贸").lineIds(Arrays.asList(1,10)).build(),
-
-            MetroStation.builder().stationName("金台夕照").lineIds(Arrays.asList(10)).build(),
-            //    MetroStation.builder().stationName("呼家楼").lineIds(Arrays.asList(6,10)).build(),
-            MetroStation.builder().stationName("团结湖").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("农业展览馆").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("亮马桥").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("三元桥").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("太阳宫").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("芍药居").lineIds(Arrays.asList(10, 13)).build(),
-            //    MetroStation.builder().stationName("惠新西街南口").lineIds(Arrays.asList(5,10)).build(),
-
-            MetroStation.builder().stationName("安贞门").lineIds(Arrays.asList(10)).build(),
-            //   MetroStation.builder().stationName("北土城").lineIds(Arrays.asList(8,10)).build(),
-            MetroStation.builder().stationName("健德门").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("牡丹园").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("西土城").lineIds(Arrays.asList(10)).build(),
-            MetroStation.builder().stationName("知春路").lineIds(Arrays.asList(10, 13)).build(),
+            MetroStation.builder().stationName("苏州街").lineIds(Arrays.asList(10)).build(),
+            // MetroStation.builder().stationName("海淀黄庄").lineIds(Arrays.asList(4,10)).build(),
             MetroStation.builder().stationName("知春里").lineIds(Arrays.asList(10)).build(),
-            //   MetroStation.builder().stationName("海淀黄庄").lineIds(Arrays.asList(4,10)).build(),
-            MetroStation.builder().stationName("苏州街").lineIds(Arrays.asList(10)).build());
+            MetroStation.builder().stationName("知春路").lineIds(Arrays.asList(10, 13)).build(),
+            MetroStation.builder().stationName("西土城").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("牡丹园").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("健德门").lineIds(Arrays.asList(10)).build(),
+            // MetroStation.builder().stationName("北土城").lineIds(Arrays.asList(8,10)).build(),
+            MetroStation.builder().stationName("安贞门").lineIds(Arrays.asList(10)).build(),
+            // MetroStation.builder().stationName("惠新西街南口").lineIds(Arrays.asList(5,10)).build(),
+            MetroStation.builder().stationName("芍药居").lineIds(Arrays.asList(10, 13)).build(),
+            MetroStation.builder().stationName("太阳宫").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("三元桥").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("亮马桥").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("农业展览馆").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("团结湖").lineIds(Arrays.asList(10)).build(),
+            // MetroStation.builder().stationName("呼家楼").lineIds(Arrays.asList(6,10)).build(),
+            MetroStation.builder().stationName("金台夕照").lineIds(Arrays.asList(10)).build(),
+            // MetroStation.builder().stationName("国贸").lineIds(Arrays.asList(1,10)).build(),
+            // MetroStation.builder().stationName("双井").lineIds(Arrays.asList(7,10)).build(),
+            MetroStation.builder().stationName("劲松").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("潘家园").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("十里河").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("分钟寺").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("成寿寺").lineIds(Arrays.asList(10)).build(),
+            //  MetroStation.builder().stationName("宋家庄").lineIds(Arrays.asList(5,10,26)).build(),
+            MetroStation.builder().stationName("石榴庄").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("大红门").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("角门东").lineIds(Arrays.asList(10)).build(),
+            //  MetroStation.builder().stationName("角门西").lineIds(Arrays.asList(4,10)).build(),
+
+            MetroStation.builder().stationName("草桥").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("纪家庙").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("首经贸").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("丰台站").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("泥洼").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("西局").lineIds(Arrays.asList(10)).build(),
+            //   MetroStation.builder().stationName("六里桥").lineIds(Arrays.asList(9,10)).build(),
+            MetroStation.builder().stationName("莲花桥").lineIds(Arrays.asList(10)).build(),
+            //   MetroStation.builder().stationName("公主坟").lineIds(Arrays.asList(1,10)).build(),
+            MetroStation.builder().stationName("西钓鱼台").lineIds(Arrays.asList(10)).build(),
+            //   MetroStation.builder().stationName("慈寿寺").lineIds(Arrays.asList(6,10)).build(),
+            MetroStation.builder().stationName("车道沟").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("长春桥").lineIds(Arrays.asList(10)).build(),
+            MetroStation.builder().stationName("火器营").lineIds(Arrays.asList(10)).build());
 
     System.out.println(
         line10Stations
@@ -958,106 +967,327 @@ public class MetroService {
             .getLines()
             .stream()
             .collect(Collectors.toMap(MetroLine::getLineId, Function.identity()));
+    List<MetroGraphText> metroGraphTexts = new ArrayList<>();
 
     // 计算单线路绘图的坐标信息.对于非环线,线路图为直线.站点的y坐标为canvas.height/2 x轴分成(站点个数+1)份.
 
     // 考虑x轴上最多有多少个站点.如果没有支线则有  line.getStationNames().size()个站点.否则从主线上找到分叉的位置.
-    int xAxisStations = line.getStationNames().size();
-    if (!CollectionUtils.isEmpty(line.getBranchLines())) {
-      for (MetroBranchLine branchLine : line.getBranchLines()) {
-        // 从这个站点开始分叉
-        String splitStationName = branchLine.getBranchLineStationNames().get(0);
-        int index = line.getStationNames().indexOf(splitStationName);
-        xAxisStations =
-            Math.max(xAxisStations, index + branchLine.getBranchLineStationNames().size());
-      }
-    }
 
-    double stationXDistance = request.getCanvasWidth() / (xAxisStations + 1.0);
+    if (!Boolean.TRUE.equals(line.getIsLoopLine())) {
 
-    int allLinesCount = 1;
-    if (!CollectionUtils.isEmpty(line.getBranchLines())) {
-      allLinesCount += line.getBranchLines().size();
-    }
-
-    double stationYDistance = request.getCanvasHeight() / (allLinesCount + 1.0);
-
-    // 先计算主线上的站点位置
-    for (int i = 0; i < mainLineStations.size(); i++) {
-      mainLineStations.get(i).setXPos((i + 1) * stationXDistance);
-      // 主线位于最下方(注意y轴正向向下
-      mainLineStations
-          .get(i)
-          .setYPos(allLinesCount / (allLinesCount + 1.0) * request.getCanvasHeight());
-    }
-    // 再计算各支线站点位置.注意分叉站的位置已经算好.这里暂不考虑分支线路又汇入主线或者有交叉的情况
-
-    if (!CollectionUtils.isEmpty(line.getBranchLines())) {
-      for (int i = 0; i < line.getBranchLines().size(); i++) {
-
-        MetroBranchLine branchLine = line.getBranchLines().get(i);
-        MetroStation splitStation =
-            stationNameToStation.get(
-                line.getBranchLines().get(i).getBranchLineStationNames().get(0));
-        branchLine.setSplitStation(splitStation);
-        branchLine.setBranchLineStations(new ArrayList<>());
-        for (int j = 1; j < branchLine.getBranchLineStationNames().size(); j++) {
-          MetroStation station =
-              stationNameToStation.get(branchLine.getBranchLineStationNames().get(j));
-
-          // 支线位置位于分叉站右上方(注意y轴向下是正向)
-          station.setXPos(splitStation.getXPos() + j * stationXDistance);
-          station.setYPos(splitStation.getYPos() - (i + 1) * stationYDistance);
-
-          branchLine.getBranchLineStations().add(station);
-          allStations.add(station);
+      int xAxisStations = line.getStationNames().size();
+      if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+        for (MetroBranchLine branchLine : line.getBranchLines()) {
+          // 从这个站点开始分叉
+          String splitStationName = branchLine.getBranchLineStationNames().get(0);
+          int index = line.getStationNames().indexOf(splitStationName);
+          xAxisStations =
+              Math.max(xAxisStations, index + branchLine.getBranchLineStationNames().size());
         }
+      }
+
+      double stationXDistance = request.getCanvasWidth() / (xAxisStations + 1.0);
+
+      int allLinesCount = 1;
+      if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+        allLinesCount += line.getBranchLines().size();
+      }
+
+      double stationYDistance = request.getCanvasHeight() / (allLinesCount + 1.0);
+
+      // 先计算主线上的站点位置
+      for (int i = 0; i < mainLineStations.size(); i++) {
+        mainLineStations.get(i).setXPos((i + 1) * stationXDistance);
+        // 主线位于最下方(注意y轴正向向下
+        mainLineStations
+            .get(i)
+            .setYPos(allLinesCount / (allLinesCount + 1.0) * request.getCanvasHeight());
+      }
+      // 再计算各支线站点位置.注意分叉站的位置已经算好.这里暂不考虑分支线路又汇入主线或者有交叉的情况
+
+      if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+        for (int i = 0; i < line.getBranchLines().size(); i++) {
+
+          MetroBranchLine branchLine = line.getBranchLines().get(i);
+          MetroStation splitStation =
+              stationNameToStation.get(
+                  line.getBranchLines().get(i).getBranchLineStationNames().get(0));
+          branchLine.setSplitStation(splitStation);
+          branchLine.setBranchLineStations(new ArrayList<>());
+          for (int j = 1; j < branchLine.getBranchLineStationNames().size(); j++) {
+            MetroStation station =
+                stationNameToStation.get(branchLine.getBranchLineStationNames().get(j));
+
+            // 支线位置位于分叉站右上方(注意y轴向下是正向)
+            station.setXPos(splitStation.getXPos() + j * stationXDistance);
+            station.setYPos(splitStation.getYPos() - (i + 1) * stationYDistance);
+
+            branchLine.getBranchLineStations().add(station);
+            allStations.add(station);
+          }
+        }
+      }
+
+      // 对于非环线,各站点的站名位于中心的右上角
+      for (MetroStation station : allStations) {
+        metroGraphTexts.add(
+            MetroGraphText.builder()
+                .text(station.getStationName())
+                .translateX(station.getXPos())
+                .translateY(station.getYPos())
+                .rotation(-Math.PI / 4)
+                .xPos(25.0)
+                .yPos(0.0)
+                .textAlign("left")
+                .build());
+      }
+
+    } else {
+      // 环线.
+      int xAxisStations =
+          Math.max(line.getTopStationNames().size(), line.getBottomStationNames().size());
+      int yAxisStations =
+          Math.max(line.getLeftStationNames().size(), line.getRightStationNames().size());
+      double stationXDistance = request.getCanvasWidth() / (xAxisStations + 4.0);
+      double stationYDistance = request.getCanvasHeight() / (yAxisStations + 4.0);
+
+      double stationRectTopLineWidth = stationXDistance * (xAxisStations + 1.0);
+      double stationRectRightLineWidth = stationYDistance * (yAxisStations + 1.0);
+
+      Map<String, MetroStation> mainLneStationNameToStation =
+          mainLineStations
+              .stream()
+              .collect(Collectors.toMap(MetroStation::getStationName, Function.identity()));
+
+      // 允许上下边站点数不同.所以各边站点分开计算位置
+      // 环线的站点名称在环外侧.换乘标志在内侧
+
+      for (int i = 0; i < line.getTopStationNames().size(); i++) {
+        String stationName = line.getTopStationNames().get(i);
+        MetroStation station = mainLneStationNameToStation.get(stationName);
+        station.setXPos(
+            stationXDistance * 2 + stationRectTopLineWidth * i / line.getTopStationNames().size());
+        station.setYPos(stationYDistance);
+
+        metroGraphTexts.add(
+            MetroGraphText.builder()
+                .text(station.getStationName())
+                .translateX(station.getXPos())
+                .translateY(station.getYPos())
+                .rotation(0.0)
+                .xPos(0.0)
+                .yPos(-15.0)
+                .textAlign("center")
+                .build());
+      }
+
+      for (int i = 0; i < line.getRightStationNames().size(); i++) {
+        String stationName = line.getRightStationNames().get(i);
+        MetroStation station = mainLneStationNameToStation.get(stationName);
+        station.setXPos(request.getCanvasWidth() - stationXDistance);
+        station.setYPos(
+            stationYDistance * 2
+                + stationRectRightLineWidth * i / line.getRightStationNames().size());
+
+        metroGraphTexts.add(
+            MetroGraphText.builder()
+                .text(station.getStationName())
+                .translateX(station.getXPos())
+                .translateY(station.getYPos())
+                .rotation(0.0)
+                .xPos(20.0)
+                .yPos(0.0)
+                .textAlign("left")
+                .build());
+      }
+
+      for (int i = 0; i < line.getBottomStationNames().size(); i++) {
+        String stationName = line.getBottomStationNames().get(i);
+        MetroStation station = mainLneStationNameToStation.get(stationName);
+        station.setXPos(
+            request.getCanvasWidth()
+                - stationXDistance * 2
+                - stationRectTopLineWidth * i / line.getBottomStationNames().size());
+        station.setYPos(request.getCanvasHeight() - stationYDistance);
+
+        metroGraphTexts.add(
+            MetroGraphText.builder()
+                .text(station.getStationName())
+                .translateX(station.getXPos())
+                .translateY(station.getYPos())
+                .rotation(0.0)
+                .xPos(0.0)
+                .yPos(30.0)
+                .textAlign("center")
+                .build());
+      }
+
+      for (int i = 0; i < line.getLeftStationNames().size(); i++) {
+        String stationName = line.getLeftStationNames().get(i);
+        MetroStation station = mainLneStationNameToStation.get(stationName);
+        station.setXPos(stationXDistance);
+        station.setYPos(
+            request.getCanvasHeight()
+                - stationYDistance * 2
+                - stationRectRightLineWidth * i / line.getLeftStationNames().size());
+
+        metroGraphTexts.add(
+            MetroGraphText.builder()
+                .text(station.getStationName())
+                .translateX(station.getXPos())
+                .translateY(station.getYPos())
+                .rotation(0.0)
+                .xPos(-20.0)
+                .yPos(10.0)
+                .textAlign("right")
+                .build());
       }
     }
 
     // 计算站点间连线数据.对于非环线,n个站点需要n-1个"线段"连接.每个线段为矩形,左右两边为凹进来的半圆. canvas绘图表现为arc+line+arc+line
     // 注意canvas绘图中原点是左上角且y轴方向向下
     List<MetroStationConnection> connections = new ArrayList<>();
+    if (!Boolean.TRUE.equals(line.getIsLoopLine())) {
 
-    for (int i = 0; i < mainLineStations.size() - 1; i++) {
-      connections.add(
-          calculateConnection(
-              line,
-              mainLineStations.get(i),
-              mainLineStations.get(i + 1),
-              ConnectionTypeEnum.HORIZONTAL,
-              request));
-    }
-
-    if (!CollectionUtils.isEmpty(line.getBranchLines())) {
-      for (MetroBranchLine branchLine : line.getBranchLines()) {
-
+      for (int i = 0; i < mainLineStations.size() - 1; i++) {
         connections.add(
             calculateConnection(
                 line,
-                branchLine.getSplitStation(),
-                branchLine.getBranchLineStations().get(0),
-                ConnectionTypeEnum.LEFT_TO_TOP,
+                mainLineStations.get(i),
+                mainLineStations.get(i + 1),
+                ConnectionTypeEnum.HORIZONTAL,
                 request));
+      }
 
-        // 非分叉站之间的连线
-        for (int i = 0; i < branchLine.getBranchLineStations().size() - 1; i++) {
+      if (!CollectionUtils.isEmpty(line.getBranchLines())) {
+        for (MetroBranchLine branchLine : line.getBranchLines()) {
+
           connections.add(
               calculateConnection(
                   line,
-                  branchLine.getBranchLineStations().get(i),
-                  branchLine.getBranchLineStations().get(i + 1),
+                  branchLine.getSplitStation(),
+                  branchLine.getBranchLineStations().get(0),
+                  ConnectionTypeEnum.LEFT_TO_TOP,
+                  request));
+
+          // 非分叉站之间的连线
+          for (int i = 0; i < branchLine.getBranchLineStations().size() - 1; i++) {
+            connections.add(
+                calculateConnection(
+                    line,
+                    branchLine.getBranchLineStations().get(i),
+                    branchLine.getBranchLineStations().get(i + 1),
+                    ConnectionTypeEnum.HORIZONTAL,
+                    request));
+          }
+        }
+      }
+    } else {
+      // 环线
+      List<MetroStation> mainLineStationsWithDuplicate = new ArrayList<>(mainLineStations);
+      mainLineStationsWithDuplicate.add(mainLineStations.get(0));
+      for (int i = 0; i < mainLineStationsWithDuplicate.size() - 1; i++) {
+
+        if (line.getTopStationNames()
+            .containsAll(
+                Arrays.asList(
+                    mainLineStationsWithDuplicate.get(i).getStationName(),
+                    mainLineStationsWithDuplicate.get(i + 1).getStationName()))) {
+          connections.add(
+              calculateConnection(
+                  line,
+                  mainLineStationsWithDuplicate.get(i),
+                  mainLineStationsWithDuplicate.get(i + 1),
                   ConnectionTypeEnum.HORIZONTAL,
+                  request));
+        } else if (line.getTopStationNames()
+                .contains(mainLineStationsWithDuplicate.get(i).getStationName())
+            && line.getRightStationNames()
+                .contains(mainLineStationsWithDuplicate.get(i + 1).getStationName())) {
+          connections.add(
+              calculateConnection(
+                  line,
+                  mainLineStationsWithDuplicate.get(i),
+                  mainLineStationsWithDuplicate.get(i + 1),
+                  ConnectionTypeEnum.TOP_TO_RIGHT,
+                  request));
+        } else if (line.getRightStationNames()
+            .containsAll(
+                Arrays.asList(
+                    mainLineStationsWithDuplicate.get(i).getStationName(),
+                    mainLineStationsWithDuplicate.get(i + 1).getStationName()))) {
+          connections.add(
+              calculateConnection(
+                  line,
+                  mainLineStationsWithDuplicate.get(i),
+                  mainLineStationsWithDuplicate.get(i + 1),
+                  ConnectionTypeEnum.VERTICAL,
+                  request));
+        } else if (line.getRightStationNames()
+                .contains(mainLineStationsWithDuplicate.get(i).getStationName())
+            && line.getBottomStationNames()
+                .contains(mainLineStationsWithDuplicate.get(i + 1).getStationName())) {
+
+          connections.add(
+              calculateConnection(
+                  line,
+                  mainLineStationsWithDuplicate.get(i),
+                  mainLineStationsWithDuplicate.get(i + 1),
+                  ConnectionTypeEnum.RIGHT_TO_BOTTOM,
+                  request));
+
+        } else if (line.getBottomStationNames()
+            .containsAll(
+                Arrays.asList(
+                    mainLineStationsWithDuplicate.get(i).getStationName(),
+                    mainLineStationsWithDuplicate.get(i + 1).getStationName()))) {
+          connections.add(
+              calculateConnection(
+                  line,
+                  mainLineStationsWithDuplicate.get(i + 1),
+                  mainLineStationsWithDuplicate.get(i),
+                  ConnectionTypeEnum.HORIZONTAL,
+                  request));
+        } else if (line.getBottomStationNames()
+                .contains(mainLineStationsWithDuplicate.get(i).getStationName())
+            && line.getLeftStationNames()
+                .contains(mainLineStationsWithDuplicate.get(i + 1).getStationName())) {
+          connections.add(
+              calculateConnection(
+                  line,
+                  mainLineStationsWithDuplicate.get(i),
+                  mainLineStationsWithDuplicate.get(i + 1),
+                  ConnectionTypeEnum.BOTTOM_TO_LEFT,
+                  request));
+        } else if (line.getLeftStationNames()
+            .containsAll(
+                Arrays.asList(
+                    mainLineStationsWithDuplicate.get(i).getStationName(),
+                    mainLineStationsWithDuplicate.get(i + 1).getStationName()))) {
+          connections.add(
+              calculateConnection(
+                  line,
+                  mainLineStationsWithDuplicate.get(i + 1),
+                  mainLineStationsWithDuplicate.get(i),
+                  ConnectionTypeEnum.VERTICAL,
+                  request));
+        } else if (line.getLeftStationNames()
+                .contains(mainLineStationsWithDuplicate.get(i).getStationName())
+            && line.getTopStationNames()
+                .contains(mainLineStationsWithDuplicate.get(i + 1).getStationName())) {
+          connections.add(
+              calculateConnection(
+                  line,
+                  mainLineStationsWithDuplicate.get(i),
+                  mainLineStationsWithDuplicate.get(i + 1),
+                  ConnectionTypeEnum.LEFT_TO_TOP,
                   request));
         }
       }
     }
 
-    // 如果有支线,支线的站点也拼上得到所有站点
-
     // 拼接换乘站相关信息 注意在此之前已经计算了各站点的绘图位置
     List<MetroStationConnection> stationTransfers = new ArrayList<>();
-    List<MetroInfo.MetroStationTransferText> transferTexts = new ArrayList<>();
     for (MetroStation stationWithTransfer :
         allStations.stream().filter(o -> o.getLineIds().size() > 1).collect(Collectors.toList())) {
 
@@ -1080,8 +1310,9 @@ public class MetroService {
                           .color(o.getColor())
                           .build())
               .collect(Collectors.toList()));
-      // 暂时不考虑4线换乘的情况.即至多有2条换乘线路
 
+      List<MetroStationConnection> currentStationTransfers = new ArrayList<>();
+      // 先按照换乘标志向下进行计算,然后根据需要旋转
       Point point1 =
           new Point(
               stationWithTransfer.getXPos() - request.getStationRadius(),
@@ -1089,18 +1320,18 @@ public class MetroService {
       Point point2 =
           new Point(
               stationWithTransfer.getXPos() - request.getStationRadius(),
-              stationWithTransfer.getYPos() + request.getCanvasHeight() / 15);
+              stationWithTransfer.getYPos() + Math.min(30, request.getCanvasHeight() / 15));
 
       Point point3 =
           new Point(
               stationWithTransfer.getXPos(),
               stationWithTransfer.getYPos()
-                  + request.getCanvasHeight() / 15
+                  + Math.min(30, request.getCanvasHeight() / 15)
                   + request.getStationRadius());
       Point point4 =
           new Point(
               stationWithTransfer.getXPos() + request.getStationRadius(),
-              stationWithTransfer.getYPos() + request.getCanvasHeight() / 15);
+              stationWithTransfer.getYPos() + Math.min(30, request.getCanvasHeight() / 15));
       Point point5 =
           new Point(
               stationWithTransfer.getXPos() + request.getStationRadius(),
@@ -1110,6 +1341,35 @@ public class MetroService {
           new Point(
               stationWithTransfer.getXPos(),
               stationWithTransfer.getYPos() + request.getStationRadius());
+
+      Double transferTextX = 0.0;
+      Double transferTextYMultiply = 1.0;
+      // 1.0=多个换乘站的时候依次向下
+      Double transferTextYDirection = 1.0;
+      String transferTextAlign = "center";
+
+      Double rotationAngle = 0.0;
+      if (!Boolean.TRUE.equals(line.getIsLoopLine())
+          || line.getTopStationNames().contains(stationWithTransfer.getStationName())) {
+        // 换乘标志向下
+        rotationAngle = 0.0;
+      } else if (line.getRightStationNames().contains(stationWithTransfer.getStationName())) {
+        rotationAngle = -Math.PI / 2;
+        // 换乘文本向左
+        transferTextX = -10.0;
+        transferTextYMultiply = 0.0;
+        transferTextAlign = "right";
+      } else if (line.getBottomStationNames().contains(stationWithTransfer.getStationName())) {
+        rotationAngle = Math.PI;
+
+        transferTextYMultiply = 0.5;
+        transferTextYDirection = -1.0;
+      } else if (line.getLeftStationNames().contains(stationWithTransfer.getStationName())) {
+        rotationAngle = Math.PI / 2;
+        transferTextX = 10.0;
+        transferTextYMultiply = 0.0;
+        transferTextAlign = "left";
+      }
 
       switch (otherLineIds.size()) {
         case 1:
@@ -1139,7 +1399,7 @@ public class MetroService {
             MetroStationConnectionLine rightLine =
                 MetroStationConnectionLine.constructFromPoints(point4, point5);
 
-            stationTransfers.add(
+            currentStationTransfers.add(
                 MetroStationConnection.builder()
                     .lines(
                         Arrays.asList(topArc, leftLine, bottomLeftLine, bottomRightLine, rightLine))
@@ -1172,7 +1432,7 @@ public class MetroService {
                     .arcEndAngle(Math.PI / 2)
                     .build();
 
-            stationTransfers.add(
+            currentStationTransfers.add(
                 MetroStationConnection.builder()
                     .lines(
                         Arrays.asList(
@@ -1183,7 +1443,7 @@ public class MetroService {
                     .color(lineIdToLine.get(otherLineIds.get(0)).getColor())
                     .build());
 
-            stationTransfers.add(
+            currentStationTransfers.add(
                 MetroStationConnection.builder()
                     .lines(
                         Arrays.asList(
@@ -1196,14 +1456,23 @@ public class MetroService {
           }
           break;
       }
+      for (MetroStationConnection stationTransfer : currentStationTransfers) {
+        stationTransfer.rotate(
+            stationWithTransfer.getXPos(), stationWithTransfer.getYPos(), rotationAngle);
+      }
+      stationTransfers.addAll(currentStationTransfers);
 
-      // 在point3下方10位置处添加文本
+      // 换乘站文本.文本基准位置为旋转后的 currentStationTransfers[0].lines[2]的终点(必定为线段)
       for (int i = 0; i < otherLineIds.size(); i++) {
-        transferTexts.add(
-            MetroInfo.MetroStationTransferText.builder()
+        metroGraphTexts.add(
+            MetroGraphText.builder()
                 .text(lineIdToLine.get(otherLineIds.get(i)).getLineName())
-                .xPos(stationWithTransfer.getXPos())
-                .yPos(point3.getY() + (i + 1) * request.getFontSize())
+                .translateX(currentStationTransfers.get(0).getLines().get(2).getLineEndX())
+                .translateY(currentStationTransfers.get(0).getLines().get(2).getLineEndY())
+                .rotation(0.0)
+                .xPos(transferTextX)
+                .yPos(transferTextYDirection * (i + transferTextYMultiply) * request.getFontSize())
+                .textAlign(transferTextAlign)
                 .build());
       }
     }
@@ -1215,7 +1484,7 @@ public class MetroService {
         .stations(allStations)
         .stationConnections(connections)
         .stationTransfers(stationTransfers)
-        .transferTexts(transferTexts)
+        .metroGraphTexts(metroGraphTexts)
         .build();
   }
 
@@ -1272,6 +1541,50 @@ public class MetroService {
 
           connectionLines =
               Arrays.asList(leftStationRightArc, topLine, rightStationLeftArc, bottomLine);
+          break;
+        }
+      case VERTICAL:
+        {
+          MetroStationConnectionLine topStationBottomArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(first.getXPos())
+                  .arcCenterY(first.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(Math.PI / 2 - theta)
+                  .arcEndAngle(Math.PI / 2 + theta)
+                  .build();
+          // 挖掉半圆的矩形的顶部线段
+          MetroStationConnectionLine leftLine =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.LINE.getIdentifier())
+                  .lineStartX(first.getXPos() - request.getStationRadius() * Math.sin(theta))
+                  .lineStartY(first.getYPos() + request.getStationRadius() * Math.cos(theta))
+                  .lineEndX(second.getXPos() - request.getStationRadius() * Math.sin(theta))
+                  .lineEndY(second.getYPos() - request.getStationRadius() * Math.cos(theta))
+                  .build();
+
+          MetroStationConnectionLine bottomStationTopArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(second.getXPos())
+                  .arcCenterY(second.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(Math.PI / 2 * 3 - theta)
+                  .arcEndAngle(Math.PI / 2 * 3 + theta)
+                  .build();
+
+          MetroStationConnectionLine rightLine =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.LINE.getIdentifier())
+                  .lineStartX(second.getXPos() + request.getStationRadius() * Math.sin(theta))
+                  .lineStartY(second.getYPos() - request.getStationRadius() * Math.cos(theta))
+                  .lineEndX(first.getXPos() + request.getStationRadius() * Math.sin(theta))
+                  .lineEndY(first.getYPos() + request.getStationRadius() * Math.cos(theta))
+                  .build();
+
+          connectionLines =
+              Arrays.asList(topStationBottomArc, leftLine, bottomStationTopArc, rightLine);
           break;
         }
 
@@ -1392,16 +1705,348 @@ public class MetroService {
 
           break;
         }
+
+      case TOP_TO_RIGHT:
+        {
+
+          // 右弧起点(逆时针)
+          Point point1 =
+              new Point(
+                  first.getXPos() + request.getStationRadius() * Math.cos(theta),
+                  first.getYPos() + request.getStationRadius() * Math.sin(theta));
+
+          // 上弧终点
+          Point point2 =
+              new Point(
+                  first.getXPos() + request.getStationRadius() * Math.cos(theta),
+                  first.getYPos() - request.getStationRadius() * Math.sin(theta));
+
+          // point2,3 y相同. point1,4 y相同.
+          Point point3 =
+              new Point(
+                  second.getXPos() - request.getStationRadius() * Math.sin(theta), point2.getY());
+
+          Point point4 =
+              new Point(
+                  second.getXPos() + request.getStationRadius() * Math.sin(theta), point1.getY());
+          // point4,5 x相同
+          Point point5 =
+              new Point(
+                  point4.getX(), second.getYPos() - request.getStationRadius() * Math.cos(theta));
+          // point3,6 x相同
+          Point point6 =
+              new Point(
+                  point3.getX(), second.getYPos() - request.getStationRadius() * Math.cos(theta));
+
+          Point circleCenter = new Point(point6.getX(), point1.getY());
+          Double outerLineRadius = circleCenter.getY() - point3.getY();
+          Double innerLineRadius = 0.0;
+
+          MetroStationConnectionLine topStationRightArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(first.getXPos())
+                  .arcCenterY(first.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(theta)
+                  .arcEndAngle(-theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 外侧曲线的水平线
+          MetroStationConnectionLine outerLineHorizontalLine =
+              MetroStationConnectionLine.constructFromPoints(point2, point3);
+          // 外侧曲线的圆弧(point2->point3)
+
+          MetroStationConnectionLine outerLineArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(circleCenter.getX())
+                  .arcCenterY(circleCenter.getY())
+                  .radius(outerLineRadius)
+                  .arcStartAngle(-Math.PI / 2)
+                  .arcEndAngle(0.0)
+                  .build();
+
+          // 外侧曲线的水平线
+          MetroStationConnectionLine outerLineVerticalLine =
+              MetroStationConnectionLine.constructFromPoints(point4, point5);
+
+          // 右边站点的上弧
+          MetroStationConnectionLine rightStationTopArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(second.getXPos())
+                  .arcCenterY(second.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(-Math.PI / 2 + theta)
+                  .arcEndAngle(-Math.PI / 2 - theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 内侧曲线的垂直线
+          MetroStationConnectionLine innerLineVerticalLine =
+              MetroStationConnectionLine.constructFromPoints(point6, circleCenter);
+
+          MetroStationConnectionLine innerLineArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(circleCenter.getX())
+                  .arcCenterY(circleCenter.getY())
+                  .radius(innerLineRadius)
+                  .arcStartAngle(0.0)
+                  .arcEndAngle(-Math.PI / 2)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 内侧曲线的水平线
+          MetroStationConnectionLine innerLineHorizontalLine =
+              MetroStationConnectionLine.constructFromPoints(circleCenter, point1);
+
+          connectionLines =
+              Arrays.asList(
+                  topStationRightArc,
+                  outerLineHorizontalLine,
+                  outerLineArc,
+                  outerLineVerticalLine,
+                  rightStationTopArc,
+                  innerLineVerticalLine,
+                  innerLineArc,
+                  innerLineHorizontalLine);
+
+          break;
+        }
+
+      case RIGHT_TO_BOTTOM:
+        {
+
+          // 下弧起点(逆时针)
+          Point point1 =
+              new Point(
+                  first.getXPos() - request.getStationRadius() * Math.sin(theta),
+                  first.getYPos() + request.getStationRadius() * Math.cos(theta));
+
+          // 上弧终点
+          Point point2 =
+              new Point(
+                  first.getXPos() + request.getStationRadius() * Math.sin(theta),
+                  first.getYPos() + request.getStationRadius() * Math.cos(theta));
+
+          // point2,3 x相同. point1,4 x相同.
+          Point point3 =
+              new Point(
+                  point2.getX(), second.getYPos() - request.getStationRadius() * Math.sin(theta));
+
+          Point point4 =
+              new Point(
+                  point1.getX(), second.getYPos() + request.getStationRadius() * Math.sin(theta));
+          // point4,5 y相同
+          Point point5 =
+              new Point(
+                  second.getXPos() + request.getStationRadius() * Math.cos(theta), point4.getY());
+          // point5,6 x相同
+          Point point6 =
+              new Point(
+                  point5.getX(), second.getYPos() - request.getStationRadius() * Math.sin(theta));
+
+          Point circleCenter = new Point(point1.getX(), point6.getY());
+          Double outerLineRadius = point3.getX() - circleCenter.getX();
+          Double innerLineRadius = 0.0;
+
+          MetroStationConnectionLine rightStationBottomArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(first.getXPos())
+                  .arcCenterY(first.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(Math.PI / 2 + theta)
+                  .arcEndAngle(Math.PI / 2 - theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 外侧曲线的垂直线
+          MetroStationConnectionLine outerLineVerticalLine =
+              MetroStationConnectionLine.constructFromPoints(point2, point3);
+          // 外侧曲线的圆弧(point2->point3)
+
+          MetroStationConnectionLine outerLineArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(circleCenter.getX())
+                  .arcCenterY(circleCenter.getY())
+                  .radius(outerLineRadius)
+                  .arcStartAngle(0.0)
+                  .arcEndAngle(Math.PI / 2)
+                  .build();
+
+          // 外侧曲线的水平线
+          MetroStationConnectionLine outerLineHorizontalLine =
+              MetroStationConnectionLine.constructFromPoints(point4, point5);
+
+          // 下方站点的右弧
+          MetroStationConnectionLine bottomStationRightArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(second.getXPos())
+                  .arcCenterY(second.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(theta)
+                  .arcEndAngle(-theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 内侧曲线的水平线
+          MetroStationConnectionLine innerLineHorizontalLine =
+              MetroStationConnectionLine.constructFromPoints(point6, circleCenter);
+
+          MetroStationConnectionLine innerLineArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(circleCenter.getX())
+                  .arcCenterY(circleCenter.getY())
+                  .radius(innerLineRadius)
+                  .arcStartAngle(Math.PI / 2)
+                  .arcEndAngle(0.0)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 内侧曲线的垂直线
+          MetroStationConnectionLine innerLineVerticalLine =
+              MetroStationConnectionLine.constructFromPoints(circleCenter, point1);
+
+          connectionLines =
+              Arrays.asList(
+                  rightStationBottomArc,
+                  outerLineVerticalLine,
+                  outerLineArc,
+                  outerLineHorizontalLine,
+                  bottomStationRightArc,
+                  innerLineHorizontalLine,
+                  innerLineArc,
+                  innerLineVerticalLine);
+
+          break;
+        }
+
+      case BOTTOM_TO_LEFT:
+        {
+
+          // 左弧起点(逆时针)
+          Point point1 =
+              new Point(
+                  first.getXPos() - request.getStationRadius() * Math.cos(theta),
+                  first.getYPos() - request.getStationRadius() * Math.sin(theta));
+
+          // 左弧终点
+          Point point2 =
+              new Point(
+                  first.getXPos() - request.getStationRadius() * Math.cos(theta),
+                  first.getYPos() + request.getStationRadius() * Math.sin(theta));
+
+          // point2,3 y相同. point1,4 y相同.
+          Point point3 =
+              new Point(
+                  second.getXPos() + request.getStationRadius() * Math.sin(theta), point2.getY());
+
+          Point point4 =
+              new Point(
+                  second.getXPos() - request.getStationRadius() * Math.sin(theta), point1.getY());
+          // point4,5 x相同
+          Point point5 =
+              new Point(
+                  point4.getX(), second.getYPos() + request.getStationRadius() * Math.cos(theta));
+          // point3,6 x相同
+          Point point6 =
+              new Point(
+                  point3.getX(), second.getYPos() + request.getStationRadius() * Math.cos(theta));
+
+          Point circleCenter = new Point(point6.getX(), point1.getY());
+          Double outerLineRadius = point3.getY() - circleCenter.getY();
+          Double innerLineRadius = 0.0;
+
+          MetroStationConnectionLine bottomStationLeftArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(first.getXPos())
+                  .arcCenterY(first.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(Math.PI + theta)
+                  .arcEndAngle(Math.PI - theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 外侧曲线的水平线
+          MetroStationConnectionLine outerLineHorizontalLine =
+              MetroStationConnectionLine.constructFromPoints(point2, point3);
+          // 外侧曲线的圆弧(point2->point3)
+
+          MetroStationConnectionLine outerLineArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(circleCenter.getX())
+                  .arcCenterY(circleCenter.getY())
+                  .radius(outerLineRadius)
+                  .arcStartAngle(Math.PI / 2)
+                  .arcEndAngle(Math.PI)
+                  .build();
+
+          // 外侧曲线的水平线
+          MetroStationConnectionLine outerLineVerticalLine =
+              MetroStationConnectionLine.constructFromPoints(point4, point5);
+
+          // 右边站点的上弧
+          MetroStationConnectionLine rightStationTopArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(second.getXPos())
+                  .arcCenterY(second.getYPos())
+                  .radius(request.getStationRadius())
+                  .arcStartAngle(Math.PI / 2 + theta)
+                  .arcEndAngle(Math.PI / 2 - theta)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 内侧曲线的垂直线
+          MetroStationConnectionLine innerLineVerticalLine =
+              MetroStationConnectionLine.constructFromPoints(point6, circleCenter);
+
+          MetroStationConnectionLine innerLineArc =
+              MetroStationConnectionLine.builder()
+                  .lineType(MetroStationLineTypeEnum.ARC.getIdentifier())
+                  .arcCenterX(circleCenter.getX())
+                  .arcCenterY(circleCenter.getY())
+                  .radius(innerLineRadius)
+                  .arcStartAngle(0.0)
+                  .arcEndAngle(-Math.PI / 2)
+                  .isCounterClockWise(true)
+                  .build();
+
+          // 内侧曲线的水平线
+          MetroStationConnectionLine innerLineHorizontalLine =
+              MetroStationConnectionLine.constructFromPoints(circleCenter, point1);
+
+          connectionLines =
+              Arrays.asList(
+                  bottomStationLeftArc,
+                  outerLineHorizontalLine,
+                  outerLineArc,
+                  outerLineVerticalLine,
+                  rightStationTopArc,
+                  innerLineVerticalLine,
+                  innerLineArc,
+                  innerLineHorizontalLine);
+
+          break;
+        }
+
       default:
         break;
     }
 
-    // 左站点的右弧.逆时针 圆心为左站点中心.半径从请求中传入
-
     return MetroStationConnection.builder()
         .lines(connectionLines)
         .color(line.getColor())
-        .name(String.format("%sto%s", first.getStationName(), second.getStationName()))
+        .name(String.format("%s to %s", first.getStationName(), second.getStationName()))
         .build();
   }
 }

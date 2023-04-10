@@ -130,6 +130,14 @@ public class MetroServiceTest {
   }
 
   @Test
+  public void testGuangzhouLine1() {
+    SingleLineMetroInfo singleLineMetroInfo =
+        metroService.singleLineMetroInfo(
+            MetroInfoRequest.builder().cityId(CityEnum.GUANGZHOU.getId()).lineId(1).build());
+    System.out.println(JsonUtil.formatCamelCase(singleLineMetroInfo));
+  }
+
+  @Test
   public void testGuangzhouLine2() {
     SingleLineMetroInfo singleLineMetroInfo =
         metroService.singleLineMetroInfo(
@@ -150,6 +158,14 @@ public class MetroServiceTest {
     SingleLineMetroInfo singleLineMetroInfo =
         metroService.singleLineMetroInfo(
             MetroInfoRequest.builder().cityId(CityEnum.GUANGZHOU.getId()).lineId(4).build());
+    System.out.println(JsonUtil.formatCamelCase(singleLineMetroInfo));
+  }
+
+  @Test
+  public void testGuangzhouLine5() {
+    SingleLineMetroInfo singleLineMetroInfo =
+        metroService.singleLineMetroInfo(
+            MetroInfoRequest.builder().cityId(CityEnum.GUANGZHOU.getId()).lineId(5).build());
     System.out.println(JsonUtil.formatCamelCase(singleLineMetroInfo));
   }
 }

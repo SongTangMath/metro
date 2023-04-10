@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <canvas id="metro-canvas" width="2000" height="500"> </canvas>
+    <canvas id="metro-canvas" width="1800" height="600"> </canvas>
   </div>
 </template>
 
@@ -52,17 +52,6 @@ export default {
         ctx.strokeStyle = "black";
         ctx.stroke();
         ctx.closePath();
-
-        //绘制站名 https://stackoverflow.com/questions/3167928/drawing-rotated-text-on-a-html5-canvas
-
-        ctx.save();
-        ctx.translate(stations[i].xpos, stations[i].ypos);
-        ctx.rotate(-Math.PI / 4);
-        ctx.textAlign = "left";
-        ctx.font = "15px Microsoft Yahei";
-        ctx.fillStyle = "black";
-        ctx.fillText(stations[i].stationName, 25, 0);
-        ctx.restore();
       }
       let allConnections = [
         ...this.singleLineData.stationConnections,
@@ -90,14 +79,18 @@ export default {
         ctx.closePath();
       }
 
-      for (let transferText of this.singleLineData.transferTexts) {
+      for (let metroGraphText of this.singleLineData.metroGraphTexts) {
         ctx.save();
-        ctx.translate(transferText.xpos, transferText.ypos);
-        // ctx.rotate(-Math.PI / 4);
-        ctx.textAlign = "center";
+        ctx.translate(metroGraphText.translateX, metroGraphText.translateY);
+        ctx.rotate(metroGraphText.rotation);
+        ctx.textAlign = metroGraphText.textAlign;
         ctx.font = "15px Microsoft Yahei";
         ctx.fillStyle = "black";
-        ctx.fillText(transferText.text, 15, 0);
+        ctx.fillText(
+          metroGraphText.text,
+          metroGraphText.xpos,
+          metroGraphText.ypos
+        );
         ctx.restore();
       }
     },

@@ -127,18 +127,27 @@ public class MetroInfo {
     private List<MetroStationConnection> stationConnections;
     // 换乘站标志.
     private List<MetroStationConnection> stationTransfers;
-    private List<MetroStationTransferText> transferTexts;
+    private List<MetroGraphText> metroGraphTexts;
   }
 
   @AllArgsConstructor
   @NoArgsConstructor
   @Data
   @Builder
-  public static class MetroStationTransferText {
-    private String text;
-    private Double xPos;
+  public static class MetroGraphText {
+    //  https://stackoverflow.com/questions/3167928/drawing-rotated-text-on-a-html5-canvas
 
+    private String text;
+    // 先平移后旋转得到新的坐标系
+    private Double translateX;
+    private Double translateY;
+    private Double rotation;
+
+    private Double xPos;
     private Double yPos;
+
+    // 文字对齐方式left center right
+    private String textAlign;
   }
 
   @AllArgsConstructor
@@ -152,6 +161,12 @@ public class MetroInfo {
     // 当前区域要填充的颜色
     private String color;
     private List<MetroStationConnectionLine> lines;
+
+    public void rotate(Double centerX, Double centerY, Double theta) {
+      for (MetroStationConnectionLine line : lines) {
+        line.rotate(centerX, centerY, theta);
+      }
+    }
   }
 
   @AllArgsConstructor
@@ -182,6 +197,40 @@ public class MetroInfo {
           .lineEndX(point2.getX())
           .lineEndY(point2.getY())
           .build();
+    }
+    // 这里theta的方向为正向(与canvas的习惯相反)
+    public void rotate(Double centerX, Double centerY, Double theta) {
+      // 各边进行旋转.对于圆弧,则绕着原来的圆弧终点进行旋转
+
+      if (lineType.equals(MetroStationLineTypeEnum.LINE.getIdentifier())) {
+        // (newStartX-centerX,newStartY-centerY)=(cos(theta)(startX-centerX)+sin(theta)(startY-centerY),-sin(theta)(startX-centerX)+cos(theta)(startY-centerY))
+        Double newStartX =
+            centerX
+                + Math.cos(theta) * (lineStartX - centerX)
+                + Math.sin(theta) * (lineStartY - centerY);
+        Double newStartY =
+            centerY
+                - Math.sin(theta) * (lineStartX - centerX)
+                + Math.cos(theta) * (lineStartY - centerY);
+
+        Double newEndX =
+            centerX
+                + Math.cos(theta) * (lineEndX - centerX)
+                + Math.sin(theta) * (lineEndY - centerY);
+        Double newEndY =
+            centerY
+                - Math.sin(theta) * (lineEndX - centerX)
+                + Math.cos(theta) * (lineEndY - centerY);
+        lineStartX = newStartX;
+        lineStartY = newStartY;
+        lineEndX = newEndX;
+        lineEndY = newEndY;
+
+      } else {
+        // 圆弧.直接以之前的圆心旋转
+        arcStartAngle -= theta;
+        arcEndAngle -= theta;
+      }
     }
   }
 }
