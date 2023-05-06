@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no maximum-scale=1.0,minimum-scale=1.0"
+    />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://necolas.github.io/normalize.css/8.0.1/normalize.css"
+    />
+    <style>
+      li {
+        list-style: none;
+      }
+      a {
+        text-decoration: none;
+      }
+
+      .wrapper1 {
+        border: 1px solid #ffc0cb;
+        overflow: hidden;
+      }
+      .wrapper1 ul {
+        float: left;
+      }
+      .wrapper1 .content {
+        float: left;
+      }
+      .wrapper1 .content img {
+        width: 200px;
+        height: 250px;
+      }
+      .wrapper1 .content div {
+        display: none;
+      }
+      .wrapper1 .content div:first-child {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper1">
+      <ul id="left">
+        <li><a href="#">女靴</a></li>
+        <li><a href="#">雪地靴</a></li>
+        <li><a href="#">冬裙</a></li>
+      </ul>
+
+      <div class="content">
+        <div>
+          <a href="#"
+            ><img
+              src="https://sy0.img.it168.com/copy/pc168/4/4671/4671945/4/4671/4671945.jpeg"
+              alt=""
+          /></a>
+        </div>
+
+        <div>
+          <a href="#"
+            ><img
+              src="https://sy0.img.pcpop.com/article/4/4663/4663945.jpg_s-w320"
+              alt=""
+          /></a>
+        </div>
+
+        <div>
+          <a href="#"
+            ><img
+              src="https://sy0.img.pcpop.com/article/4/4661/4661746.png_s-w320"
+              alt=""
+          /></a>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.4.js"></script>
+  <script>
+    $(function () {
+      $("#left li").mouseover(function () {
+        let index = $(this).index();
+        $(".wrapper1 .content div").eq(index).show();
+        $(".wrapper1 .content div").eq(index).siblings().hide();
+      });
+    });
+  </script>
+</html>

@@ -2,3 +2,4 @@
 target
 metro.iml
 package-lock.json
+.DS_Store

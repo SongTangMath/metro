@@ -46,3 +46,17 @@ border-radius: 50%
 
 ## 图片适配div尺寸
 width: 100%
+注意父div必须有width
+
+## 关于li小圆圈水平居中
+https://www.zhangxinxu.com/wordpress/2022/11/about-css-list-style-type-item/
+
+想要显示小圆圈则元素的display必须为list-item所以如果修改了display属性
+
+(例如希望用display: inline-block配合父ol text-align:center实现居中)
+
+就会发现小圆圈不见了
+
+经过若干测试,最好的方式还是flex布局
+
+https://zhuanlan.zhihu.com/p/139223943

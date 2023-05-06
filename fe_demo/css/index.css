@@ -1,0 +1,192 @@
+.main {
+  width: 980px;
+  height: 455px;
+  margin-left: 220px;
+  margin-top: 10px;
+}
+
+.focus {
+  width: 721px;
+  height: 455px;
+  float: left;
+}
+
+.newsflash {
+  float: right;
+  width: 250px;
+  height: 455px;
+}
+
+.newsflash .news {
+  height: 165px;
+  border: 1px solid #e4e4e4;
+}
+
+.newsflash .news .news-hd {
+  height: 33px;
+  border-bottom: 1px dotted #e4e4e4;
+  line-height: 33px;
+  padding: 0 15px;
+}
+
+.newsflash .news .news-hd h5 {
+  float: left;
+  font-size: 14px;
+}
+.newsflash .news .news-hd .more {
+  float: right;
+}
+.newsflash .news .news-hd .more::after {
+  font-family: "iconfont";
+  content: "\e602";
+}
+.newsflash .news .news-bd {
+  padding: 5px 15px 0;
+}
+
+.newsflash .news .news-bd ul li {
+  height: 24px;
+  line-height: 24px;
+  font-size: 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.newsflash .news .news-bd ul li a {
+  color: black;
+}
+
+.newsflash .lifeservice {
+  height: 209px;
+  border: 1px solid #e4e4e4;
+  border-top: 0;
+  overflow: hidden;
+}
+
+.newsflash .bargain {
+  margin-top: 5px;
+}
+.lifeservice ul {
+  width: 252px;
+}
+.lifeservice ul li {
+  float: left;
+  width: 63px;
+  height: 71px;
+  border-right: 1px solid #e4e4e4;
+  border-bottom: 1px solid #e4e4e4;
+  text-align: center;
+}
+.lifeservice ul li i {
+  display: inline-block;
+  width: 24px;
+  height: 28px;
+  margin-top: 12px;
+  background: url("https://sy1.img.pcpop.com/article/4/4567/4567087.jpg_s-w230");
+}
+
+.recom {
+  height: 163px;
+  margin-top: 12px;
+  background-color: #ebebeb;
+}
+.recom_hd {
+  float: left;
+  text-align: center;
+  height: 163px;
+  width: 205px;
+  padding-top: 30px;
+}
+.recom_bd {
+  float: left;
+}
+.recom_bd ul li {
+  position: relative;
+  float: left;
+}
+
+.recom_bd ul li img {
+  width: 150px;
+  height: 150px;
+}
+.recom_bd ul li:nth-child(-n + 3):after {
+  content: "";
+  width: 1px;
+  height: 145px;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  background-color: #ddd;
+}
+
+.jiadian .box_hd {
+  height: 30px;
+  border-bottom: 1px solid #c81623;
+}
+.jiadian .box_hd h3 {
+  float: left;
+  font-size: 18px;
+  color: #c81623;
+  font-weight: 400;
+}
+.jiadian .box_hd .tab_list {
+  float: right;
+  line-height: 30px;
+}
+
+.jiadian .box_hd ul li {
+  float: left;
+}
+
+.jiadian .box_hd ul li a {
+  margin: 0 15px;
+}
+
+.floor .w {
+  margin-top: 30px;
+}
+
+.jiadian .box_bd {
+  height: 361px;
+}
+.jiadian .box_bd .tab_content .tab_list_item > div {
+  float: left;
+}
+
+.col_210 {
+  width: 210px;
+  background-color: #fff;
+  text-align: center;
+}
+.col_210 ul li {
+  width: 85px;
+  height: 34px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+  line-height: 33px;
+  float: left;
+  margin-right: 10px;
+}
+.col_210 ul {
+  padding-left: 12px;
+}
+.col_210 a img {
+  width: 210px;
+}
+.col_329 {
+  width: 329px;
+}
+
+.col_221 {
+  width: 221px;
+  border-right: 1px solid #ccc;
+}
+
+.col_219 {
+  width: 219px;
+}
+.bb {
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
